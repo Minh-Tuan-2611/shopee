@@ -338,6 +338,10 @@
     display: none;
 }
 
+.active {
+    display: block;
+}
+
 .auth-form__container {
     padding: 0 32px;
 }

@@ -74,8 +74,12 @@ html {
     left: 0;
     right: 0;
     bottom: 0;
-    display: flex;
+    display: none;
     animation: fadeIn linear 0.5s;
+}
+
+.modal.active {
+    display: flex;
 }
 
 .modal__overlay {
