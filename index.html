@@ -813,13 +813,20 @@
                     </div>
                     <div class="auth-form__form">
                         <div class="auth-form__group">
-                            <input type="text" class="auth-form__input" placeholder="Email của bạn">
+                            <input id="email-register" type="email" class="auth-form__input register" placeholder="Email của bạn">
+                            <div class="error-msg"></div>
                         </div>
                         <div class="auth-form__group">
-                            <input type="password" class="auth-form__input" placeholder="Mật khẩu của bạn">
+                            <input id="username-register" type="text" class="auth-form__input register" placeholder="Username của bạn">
+                            <div class="error-msg"></div>
                         </div>
                         <div class="auth-form__group">
-                            <input type="password" class="auth-form__input" placeholder="Nhập lại mật khẩu">
+                            <input id="password-register" type="password" class="auth-form__input register" placeholder="Mật khẩu của bạn">
+                            <div class="error-msg"></div>
+                        </div>
+                        <div class="auth-form__group">
+                            <input id="password-confirm" type="password" class="auth-form__input register" placeholder="Nhập lại mật khẩu">
+                            <div class="error-msg"></div>
                         </div>
                     </div>
 
@@ -834,7 +841,7 @@
 
                     <div class="auth-form__controls">
                         <button class="btn cancle">TRỞ LẠI</button>
-                        <button class="btn btn--primary">ĐĂNG KÝ</button>
+                        <button onclick="createAccount()" class="btn btn--primary">ĐĂNG KÝ</button>
                     </div>
                 </div>
 
@@ -859,10 +866,12 @@
                     </div>
                     <div class="auth-form__form">
                         <div class="auth-form__group">
-                            <input type="text" class="auth-form__input" placeholder="Email của bạn">
+                            <input id="email-login" type="email" class="auth-form__input login" placeholder="Email của bạn">
+                            <div class="error-msg"></div>
                         </div>
                         <div class="auth-form__group">
-                            <input type="password" class="auth-form__input" placeholder="Mật khẩu của bạn">
+                            <input id="password-login" type="password" class="auth-form__input login" placeholder="Mật khẩu của bạn">
+                            <div class="error-msg"></div>
                         </div>
 
                     </div>
@@ -877,7 +886,7 @@
 
                     <div class="auth-form__controls">
                         <button class="btn cancle">TRỞ LẠI</button>
-                        <button class="btn btn--primary">ĐĂNG NHẬP</button>
+                        <button onclick="loginAccount()" class="btn btn--primary">ĐĂNG NHẬP</button>
                     </div>
                 </div>
 

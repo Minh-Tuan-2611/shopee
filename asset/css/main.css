@@ -377,8 +377,14 @@
     font-size: 12px;
 }
 
-.auth-form__input:focus {
-    border-color: #888;
+.input-error {
+    border-color: rgba(235, 42, 8, 0.808);
+}
+
+.error-msg {
+    font-style: italic;
+    color: rgba(235, 42, 8, 0.808);
+    margin-top: 4px;
 }
 
 .auth-form__aside {
