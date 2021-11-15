@@ -242,7 +242,6 @@ function loginAccount() {
             }
         }
         modal.classList.remove('active');
-        alert('Bạn đã đăng nhập thành công !');
         document.querySelector('.user').innerHTML = ''
         document.querySelector('.user').innerHTML = `<li class="header__navbar-item header__navbar-user">
                                                         <img src="https://static.vecteezy.com/system/resources/thumbnails/002/318/271/small/user-profile-icon-free-vector.jpg" alt="" class="header__navbar-user-img"> 
@@ -262,6 +261,8 @@ function loginAccount() {
                                                             </li>
                                                         </ul>
                                                     </li>`;
+        alert('Bạn đã đăng nhập thành công !');
+
     }
 }
 
