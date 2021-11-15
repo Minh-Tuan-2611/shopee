@@ -1,4 +1,5 @@
 // Chuyển đổi đăng kí và đăng nhập
+
 var button_1 = document.querySelector('.auth-form__switch-btn');
 var button_2 = document.querySelectorAll('.auth-form__switch-btn')[1];
 
@@ -17,14 +18,11 @@ button_2.onclick = function() {
 
 // Ấn để hiên ra đăng kí và đăng nhập
 
-var button_registed = document.querySelector('.header__navbar-item-strong');
-var button_login = document.querySelectorAll('.header__navbar-item-strong')[1];
-
-button_registed.onclick = function() {
+function open1() {
     document.querySelector('.modal').classList.add('active');
 }
 
-button_login.onclick = function() {
+function open2() {
     document.querySelector('.modal').classList.add('active');
     tab_1.classList.remove('active');
     tab_2.classList.add('active');
@@ -181,11 +179,18 @@ function createAccount() {
         document.querySelector('#password-register').value = '';
         document.querySelector('#password-confirm').value = '';
         document.querySelector('#username-register').value = '';
-        alert('Bạn đã đăng ký tài khoản thành công');
+        alert('Bạn đã đăng ký tài khoản thành công !');
     }
 }
 
 // Đăng nhập
+function renderLoginRegister() {
+    document.querySelector('.user').innerHTML = `<li class="header__navbar-item header__navbar-item-strong header__navbar-item--separate">Đăng ký</li>
+    <li class="header__navbar-item header__navbar-item-strong">Đăng nhập</li>`
+}
+
+renderLoginRegister();
+
 function loginAccount() {
     var email = document.getElementById('email-login').value;
     var password = document.getElementById('password-login').value;
@@ -205,4 +210,59 @@ function loginAccount() {
         document.getElementById('password-login').classList.add('input-error');
         document.getElementById('password-login').parentElement.querySelector('.error-msg').innerHTML = 'Vui lòng nhập đúng giá trị của trường này';
     }
+
+    var checkEmail = false;
+    var checkPassword = false;
+    for (var i = 0; i < accoutList.length; i++) {
+        var currentAccount = accoutList[i];
+        if (email == currentAccount.email) {
+            checkEmail = true;
+            if (password == currentAccount.password) {
+                checkPassword = true;
+            }
+        }
+    }
+    if (checkEmail == false) {
+        document.getElementById('email-login').classList.add('input-error');
+        document.getElementById('email-login').parentElement.querySelector('.error-msg').innerHTML = 'Email không tồn tại, vui lòng nhập lại !';
+    }
+    if (checkEmail == true) {
+        if (checkPassword == false) {
+            document.getElementById('password-login').classList.add('input-error');
+            document.getElementById('password-login').parentElement.querySelector('.error-msg').innerHTML = 'Sai mật khẩu, vui lòng nhập lại !';
+        }
+    }
+    if (checkEmail == true && checkPassword == true) {
+        document.getElementById('email-login').value = '';
+        document.getElementById('password-login').value = '';
+        for (var i = 0; i < accoutList.length; i++) {
+            var currentAccount = accoutList[i];
+            if (email == currentAccount.email) {
+                var thisAccount = currentAccount;
+            }
+        }
+        modal.classList.remove('active');
+        alert('Bạn đã đăng nhập thành công !');
+        document.querySelector('.user').innerHTML = ''
+        document.querySelector('.user').innerHTML = `<li class="header__navbar-item header__navbar-user">
+                                                        <img src="https://static.vecteezy.com/system/resources/thumbnails/002/318/271/small/user-profile-icon-free-vector.jpg" alt="" class="header__navbar-user-img"> 
+                                                        <span class="header__navbar-user-name">${thisAccount.username}</span>
+                                                        <ul class="header__navbar-user-menu">
+                                                            <li class="header__navbar-user-item">
+                                                                <a href="">Tài khoản của tôi</a>
+                                                            </li>
+                                                            <li class="header__navbar-user-item">
+                                                                <a href="">Địa chỉ của tôi</a>
+                                                            </li>
+                                                            <li class="header__navbar-user-item">
+                                                                <a href="">Đơn mua</a>
+                                                            </li>
+                                                            <li onclick="renderLoginRegister()" class="header__navbar-user-item">
+                                                                <a href="">Đăng xuất</a>
+                                                            </li>
+                                                        </ul>
+                                                    </li>`;
+    }
 }
+
+// hiển thị accountUser
