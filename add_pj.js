@@ -53,7 +53,7 @@ console.log(listProduct);
 function renderProduct() {
     var y = listProduct.map(function(product, index) {
         return `<div class="grid__column-2-5">
-        <a class="home-product-item" href="#">
+        <a onclick="renderProductDetail('${product.id}')" class="home-product-item" href="#">
             <img src="${product.img}" alt="" class="home-product-item__img">
             <h4 class="home-product-item__name">${product.name}</h4>
             <div class="home-product-item__price">

@@ -325,6 +325,22 @@ function checkAccountStatus() {
 
 checkAccountStatus();
 
+function product(id, img, name, priceOld, percentSale, rating) {
+    if (id == null) {
+        this.id = taoId();
+    } else {
+        this.id = id;
+    }
+    this.img = img;
+    this.name = name;
+    this.priceOld = priceOld;
+    this.percentSale = percentSale;
+    this.priceNew = function() {
+        return parseInt(this.priceOld * (1 - this.percentSale / 100));
+    }
+    this.rating = rating;
+}
+
 function renderAppContainer() {
     document.querySelector('.app__container').innerHTML = `<div class="grid">
     <div class="grid__row app__content">
@@ -428,6 +444,107 @@ function renderAppContainer() {
         </div>
     </div>
 </div>`
+    var product_list = JSON.parse(localStorage.getItem('productList'));
+    if (product_list == null) {
+        product_list = [];
+    }
+
+    var listProduct = [];
+    for (var i = 0; i < product_list.length; i++) {
+        var product_item = new product(product_list[i].id, product_list[i].img, product_list[i].name, product_list[i].priceOld, product_list[i].percentSale, product_list[i].rating);
+        listProduct.push(product_item);
+    }
+    console.log(listProduct);
+
+    var y = listProduct.map(function(product, index) {
+        return `<div class="grid__column-2-5">
+    <a onclick="renderProductDetail('${product.id}')" class="home-product-item" href="#">
+        <img src="${product.img}" alt="" class="home-product-item__img">
+        <h4 class="home-product-item__name">${product.name}</h4>
+        <div class="home-product-item__price">
+            <span class="home-product-item__price-old">${product.priceOld} ₫</span>
+            <span class="home-product-item__price-current">${product.priceNew()} ₫</span>
+        </div>
+        <div class="home-product-item__action">
+            <span class="home-product-item__like home-product-item__like--liked">
+                <i class="home-product-item__like-icon-empty far fa-heart"></i>
+                <i class="home-product-item__like-icon-fill fas fa-heart"></i>
+            </span>
+            <div class="home-product-item__rating">
+                <i class="home-product-item__star-gold fas fa-star"></i>
+                <i class="home-product-item__star-gold fas fa-star"></i>
+                <i class="home-product-item__star-gold fas fa-star"></i>
+                <i class="home-product-item__star-gold fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <div class="home-product-item__sold">${product.rating} đã bán</div>
+        </div>
+        <div class="home-product-item__origin">
+            <span class="home-product-item__brand">Whoo</span>
+            <span class="home-product-item__origin-title">Hàn Quốc</span>
+        </div>
+        <div class="home-product-item__favourite">
+            <i class="fas fa-check"></i>
+            <span>Yêu thích</span>
+        </div>
+        <div class="home-product-item__sale-off">
+            <span class="home-product-item__sale-off-percent">${product.percentSale}%</span>
+            <span class="home-product-item__sale-off-lable">GIẢM</span>
+        </div>
+    </a>
+</div>`
+    })
+    var z = y.join(' ');
+
+    document.querySelector('.list-product').innerHTML = z;
 }
 
 renderAppContainer();
+
+function renderProductDetail(id) {
+
+    var product_list = JSON.parse(localStorage.getItem('productList'));
+    if (product_list == null) {
+        product_list = [];
+    }
+
+    var listProduct = [];
+    for (var i = 0; i < product_list.length; i++) {
+        var product_item = new product(product_list[i].id, product_list[i].img, product_list[i].name, product_list[i].priceOld, product_list[i].percentSale, product_list[i].rating);
+        listProduct.push(product_item);
+    }
+
+    for (var i = 0; i < listProduct.length; i++) {
+        var currentProduct = listProduct[i];
+        if (currentProduct.id == id) {
+            var thisProduct = currentProduct;
+        }
+    }
+
+    document.querySelector('.app__container').innerHTML = `<div class="grid">
+    <div class="grid__row product-detail">
+        <img src="${thisProduct.img}" alt="" class="product-detail-img">
+        <div class="product-detail-infor">
+            <h1 class="product-detail-name">${thisProduct.name}</h1>
+            <div class="product-detail-price">
+                <div class="product-detail-price-price">
+                    <p class="product-detail-priceOld">${thisProduct.priceOld} ₫</p>
+                    <p class="product-detail-priceSale">${thisProduct.priceNew()} ₫</p>
+                    <p class="product-detail-percentSale">${thisProduct.percentSale}% GIẢM</p>
+                </div>
+                <div class="product-detail-price-slogan">
+                    <img src="./asset/img/soganicon.png" alt="" class="product-detail-price-slogan-img">
+                    <div class="product-detail-price-slogan-text-text">
+                        <p class="product-detail-price-slogan-text">Gì cũng rẻ</p>
+                        <p class="product-detail-price-slogan-ad">Giá tốt nhất so với các sản phẩm cùng loại trên Shopee!</p>
+                    </div>
+                </div>
+            </div>
+            <button class="product-detail-btn">
+                <i class="fas fa-cart-plus product-detail-btn-icon"></i>
+                Thêm Vào Giỏ Hàng
+            </button>
+        </div>
+    </div>
+</div>`
+}
