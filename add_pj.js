@@ -20,7 +20,7 @@ function product(id, img, name, priceOld, percentSale, rating) {
     this.priceOld = priceOld;
     this.percentSale = percentSale;
     this.priceNew = function() {
-        return this.priceOld * (1 - this.percentSale / 100);
+        return parseInt(this.priceOld * (1 - this.percentSale / 100));
     }
     this.rating = rating;
 }
