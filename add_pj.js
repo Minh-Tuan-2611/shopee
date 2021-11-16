@@ -57,8 +57,8 @@ function renderProduct() {
             <img src="${product.img}" alt="" class="home-product-item__img">
             <h4 class="home-product-item__name">${product.name}</h4>
             <div class="home-product-item__price">
-                <span class="home-product-item__price-old">${product.priceOld}</span>
-                <span class="home-product-item__price-current">${product.priceNew()}</span>
+                <span class="home-product-item__price-old">${product.priceOld} ₫</span>
+                <span class="home-product-item__price-current">${product.priceNew()} ₫</span>
             </div>
             <div class="home-product-item__action">
                 <span class="home-product-item__like home-product-item__like--liked">
