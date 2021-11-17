@@ -633,7 +633,7 @@ function renderCart() {
                     <p class="cart-item-price-old">${thisProducts[i].priceOld} ₫</p>
                     <p class="cart-item-price-sale">${thisProducts[i].priceNew()} ₫</p>
                 </div>
-                <input type="number" class="cart-item-number" value="${thisCartItems[i].number}">
+                <p class="cart-item-number">Số lượng: ${thisCartItems[i].number}</p>
                 <p class="cart-item-sum-money">${thisProducts[i].priceNew()*thisCartItems[i].number} ₫</p>
                 <div class="cart-item-delete">
                     <i onclick="removeCart('${thisProducts[i].id}'),renderCartNoti()" class="fas fa-trash cart-item-delete-icon"></i>

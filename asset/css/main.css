@@ -1336,6 +1336,7 @@ i.home-product-item__like-icon-fill {
     margin: 0 20px;
     margin-bottom: 12px;
     flex: 1;
+    font-size: 13px;
 }
 
 .cart-item-sum-money {
