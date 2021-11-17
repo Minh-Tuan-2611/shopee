@@ -794,6 +794,13 @@
     font-size: 1.4rem;
     font-weight: 500;
     margin: 0;
+    height: 16px;
+    overflow: hidden;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    width: 130px;
 }
 
 .header__cart-item-price {
@@ -838,6 +845,7 @@
 .app__container {
     background-color: #f5f5f5;
     padding: 30px 0;
+    min-height: 278px;
 }
 
 .app__content {
@@ -1260,6 +1268,102 @@ i.home-product-item__like-icon-fill {
 }
 
 .cart-empty-btn:hover {
+    opacity: 0.7;
+}
+
+.cart {
+    display: flex;
+    flex-direction: column;
+    width: 1100px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    justify-content: space-around;
+}
+
+.cart-item-img {
+    width: 60px;
+}
+
+.cart-item-name {
+    margin: 0 12px;
+    font-size: 14px;
+    color: #666;
+    flex: 3;
+    height: 32px;
+    overflow: hidden;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.cart-item-price {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    flex: 2;
+}
+
+.cart-item-price-old {
+    font-size: 15px;
+    text-decoration: line-through;
+    margin-right: 10px;
+    color: #f7452e;
+    width: 50%;
+}
+
+.cart-item-price-sale {
+    font-size: 14px;
+    color: #333;
+}
+
+.cart-item-number {
+    width: 60px;
+    margin: 0 20px;
+    margin-bottom: 12px;
+    flex: 1;
+}
+
+.cart-item-sum-money {
+    font-size: 14px;
+    margin-bottom: 24px;
+    flex: 1;
+}
+
+.cart-item-delete {
+    font-size: 15px;
+    margin: 0 0 11px 20px;
+}
+
+.cart-item-delete-icon {
+    color: #666;
+}
+
+.cart-item-delete-icon:hover {
+    color: #f7452e;
+    cursor: pointer;
+}
+
+.delete-all {
+    padding: 9px;
+    cursor: pointer;
+    margin-left: auto;
+    background-color: #f7452e;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    font-size: 12px;
+}
+
+.delete-all:hover {
     opacity: 0.7;
 }
 

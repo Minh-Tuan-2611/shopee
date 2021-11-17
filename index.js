@@ -539,7 +539,7 @@ function renderProductDetail(id) {
                     </div>
                 </div>
             </div>
-            <button class="product-detail-btn">
+            <button onclick="addCart('${thisProduct.id}'),renderCartNoti()" class="product-detail-btn">
                 <i class="fas fa-cart-plus product-detail-btn-icon"></i>
                 Thêm Vào Giỏ Hàng
             </button>
@@ -548,10 +548,189 @@ function renderProductDetail(id) {
 </div>`
 }
 
-function renderCart() {
-    document.querySelector('.app__container').innerHTML = `<div class="cart-empty">
-    <img src="./asset/img/no_cart.png" alt="" class="cart-empty-img">
-    <div class="cart-empty-text">Giỏ hàng của bạn còn trống</div>
-    <button onclick="renderAppContainer();" class="cart-empty-btn">MUA NGAY</button>
-</div>`
+function cartItem(id, number) {
+    this.id = id;
+    this.number = number;
 }
+
+var keyLocalStorage = 'cartListItem';
+
+function getCartListItem() {
+    var cartListItem = new Array();
+    var jsonCartListItem = localStorage.getItem(keyLocalStorage);
+    if (jsonCartListItem == null) {
+        cartListItem = new Array();
+    } else {
+        cartListItem = JSON.parse(jsonCartListItem);
+    }
+    return cartListItem;
+}
+
+function saveCartListItemToStorage(cartListItem) {
+    var jsonCartListItem = JSON.stringify(cartListItem);
+    localStorage.setItem(keyLocalStorage, jsonCartListItem);
+}
+
+function addCart(id) {
+    alert('Thêm thành công sản phẩm này');
+    var cartListItem = getCartListItem();
+    var checkCart = false;
+    for (var i = 0; i < cartListItem.length; i++) {
+        var currentItem = cartListItem[i];
+        if (currentItem.id == id) {
+            cartListItem[i].number++;
+            checkCart = true;
+        }
+    }
+    if (checkCart == false) {
+        var itemCart = new cartItem(id, 1);
+        cartListItem.push(itemCart);
+    }
+    saveCartListItemToStorage(cartListItem);
+}
+
+function renderCart() {
+    var cartListItem = getCartListItem();
+    if (cartListItem.length == 0) {
+        document.querySelector('.app__container').innerHTML = `<div class="cart-empty">
+        <img src="./asset/img/no_cart.png" alt="" class="cart-empty-img">
+        <div class="cart-empty-text">Giỏ hàng của bạn còn trống</div>
+        <button onclick="renderAppContainer();" class="cart-empty-btn">MUA NGAY</button>
+    </div>`
+    } else if (cartListItem.length > 0) {
+        var product_list = JSON.parse(localStorage.getItem('productList'));
+        if (product_list == null) {
+            product_list = [];
+        }
+
+        var listProduct = [];
+        for (var i = 0; i < product_list.length; i++) {
+            var product_item = new product(product_list[i].id, product_list[i].img, product_list[i].name, product_list[i].priceOld, product_list[i].percentSale, product_list[i].rating);
+            listProduct.push(product_item);
+        }
+
+        var thisProducts = [];
+        var thisCartItems = [];
+
+        for (var i = 0; i < cartListItem.length; i++) {
+            for (var j = 0; j < listProduct.length; j++) {
+                if (cartListItem[i].id == listProduct[j].id) {
+                    var thisProduct = listProduct[j];
+                    thisProducts.push(thisProduct);
+                    var thisCartItem = cartListItem[i];
+                    thisCartItems.push(thisCartItem);
+                }
+            }
+        }
+
+        var htmlCart = `<div class="cart">`
+        for (var i = 0; i < thisProducts.length; i++) {
+            htmlCart += `
+            <div class="cart-item">
+                <img class="cart-item-img" src="${thisProducts[i].img}" alt="">
+                <p class="cart-item-name">${thisProducts[i].name}</p>
+                <div class="cart-item-price">
+                    <p class="cart-item-price-old">${thisProducts[i].priceOld} ₫</p>
+                    <p class="cart-item-price-sale">${thisProducts[i].priceNew()} ₫</p>
+                </div>
+                <input type="number" class="cart-item-number" value="${thisCartItems[i].number}">
+                <p class="cart-item-sum-money">${thisProducts[i].priceNew()*thisCartItems[i].number} ₫</p>
+                <div class="cart-item-delete">
+                    <i onclick="removeCart('${thisProducts[i].id}')" class="fas fa-trash cart-item-delete-icon"></i>
+                </div>
+            </div>`
+        }
+        htmlCart += `<button onclick="removeAllCart(),renderCartNoti()" class="delete-all">Xóa toàn bộ sản phẩm</button>`
+        document.querySelector('.app__container').innerHTML = htmlCart;
+    }
+}
+
+function removeCart(id) {
+    var cartListItem = getCartListItem();
+    for (var i = 0; i < cartListItem.length; i++) {
+        var currentItem = cartListItem[i];
+        if (currentItem.id == id) {
+            cartListItem[i].number--;
+            saveCartListItemToStorage(cartListItem);
+            renderCart()
+        }
+        if (cartListItem[i].number == 0) {
+            cartListItem.splice(i, 1);
+            saveCartListItemToStorage(cartListItem);
+            renderCart()
+        }
+    }
+}
+
+function removeAllCart() {
+    var cartListItem = getCartListItem();
+    cartListItem.splice(0, cartListItem.length);
+    saveCartListItemToStorage(cartListItem);
+    document.querySelector('.app__container').innerHTML = `<div class="cart-empty">
+        <img src="./asset/img/no_cart.png" alt="" class="cart-empty-img">
+        <div class="cart-empty-text">Giỏ hàng của bạn còn trống</div>
+        <button onclick="renderAppContainer();" class="cart-empty-btn">MUA NGAY</button>
+    </div>`
+}
+
+function renderCartNoti() {
+    var cartListItem = getCartListItem();
+    if (cartListItem.length == 0) {
+        document.querySelector('.header__cart-list').innerHTML = `<img src="./asset/img/no_cart.png" alt="" class="header__cart--no-cart-img">
+        <p class="header__cart-list--no-cart-msg">
+            Chưa có sản phẩm
+        </p>`
+    } else if (cartListItem.length > 0) {
+        var product_list = JSON.parse(localStorage.getItem('productList'));
+        if (product_list == null) {
+            product_list = [];
+        }
+
+        var listProduct = [];
+        for (var i = 0; i < product_list.length; i++) {
+            var product_item = new product(product_list[i].id, product_list[i].img, product_list[i].name, product_list[i].priceOld, product_list[i].percentSale, product_list[i].rating);
+            listProduct.push(product_item);
+        }
+
+        var thisProducts = [];
+        var thisCartItems = [];
+
+        for (var i = 0; i < cartListItem.length; i++) {
+            for (var j = 0; j < listProduct.length; j++) {
+                if (cartListItem[i].id == listProduct[j].id) {
+                    var thisProduct = listProduct[j];
+                    thisProducts.push(thisProduct);
+                    var thisCartItem = cartListItem[i];
+                    thisCartItems.push(thisCartItem);
+                }
+            }
+        }
+
+        htmlNoti = ``
+        for (var i = 0; i < thisProducts.length; i++) {
+            htmlNoti += `<h4 class="header__cart-heading">Sản phẩm đã thêm</h4>
+            <ul class="header__cart-list-item">
+                <li class="header__cart-item">
+                    <img src="${thisProducts[i].img}" alt="" class="header__cart-img">
+                    <div class="header__cart-item-info">
+                        <div class="header__cart-item-head">
+                            <h5 class="header__cart-item-name">${thisProducts[i].name}</h5>
+                            <div class="header__cart-item-price-wrap">
+                                <span class="header__cart-item-price">${thisProducts[i].priceNew()} ₫</span>
+                                <span class="header__cart-item-multiply">x</span>
+                                <span class="header__cart-item-qnt">${thisCartItems[i].number}</span>
+                            </div>
+                        </div>
+                        <div class="header__cart-item-body">
+                            <span class="header__cart-item-description">Phân loại hàng: Bạc</span>
+                        </div>
+                    </div>
+                </li>
+            </ul>`
+        }
+        htmlNoti += `<button onclick="renderCart()" class="btn btn--primary header__cart-has-cart-button">Xem giỏ hàng</button>`
+        document.querySelector('.header__cart-list').innerHTML = htmlNoti;
+    }
+}
+
+renderCartNoti();
