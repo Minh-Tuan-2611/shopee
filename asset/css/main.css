@@ -762,11 +762,16 @@
 
 .header__cart-item {
     display: flex;
+    align-items: center;
 }
 
 .header__cart-item:hover {
     background-color: #eee;
     cursor: pointer;
+}
+
+.none {
+    display: none;
 }
 
 .header__cart-img {
@@ -781,13 +786,13 @@
     padding-top: 18px;
     padding-bottom: 0;
     height: 55px;
+    padding-right: 12px;
 }
 
 .header__cart-item-head {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-right: 12px;
 }
 
 .header__cart-item-name {
@@ -800,7 +805,8 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
-    width: 130px;
+    flex: 1;
+    margin-right: 12px;
 }
 
 .header__cart-item-price {

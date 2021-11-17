@@ -676,10 +676,16 @@ function removeAllCart() {
 function renderCartNoti() {
     var cartListItem = getCartListItem();
     if (cartListItem.length == 0) {
-        document.querySelector('.header__cart-list').innerHTML = `<img src="./asset/img/no_cart.png" alt="" class="header__cart--no-cart-img">
+        document.querySelector('.header__cart').innerHTML = `
+        <div class="header__cart-wrap">
+                        <i class="header__cart-icon fas fa-shopping-cart"></i>
+                        <div class="header__cart-list">
+        <img src="./asset/img/no_cart.png" alt="" class="header__cart--no-cart-img">
         <p class="header__cart-list--no-cart-msg">
             Chưa có sản phẩm
-        </p>`
+        </p>
+        </div></div>`
+        document.querySelector('.header__cart-notice').classList.add('none');
     } else if (cartListItem.length > 0) {
         var product_list = JSON.parse(localStorage.getItem('productList'));
         if (product_list == null) {
@@ -706,9 +712,14 @@ function renderCartNoti() {
             }
         }
 
-        htmlNoti = `<h4 class="header__cart-heading">Sản phẩm đã thêm</h4>`
+        htmlNoti = `<div class="header__cart-wrap">
+                        <i class="header__cart-icon fas fa-shopping-cart"></i>
+                        <span class="header__cart-notice">${thisCartItems.length}</span>
+                        <div class="header__cart-list">
+                            <h4 class="header__cart-heading">Sản phẩm đã thêm</h4>
+                            <ul class="header__cart-list-item">`
         for (var i = 0; i < thisProducts.length; i++) {
-            htmlNoti += `<ul class="header__cart-list-item">
+            htmlNoti += `
                 <li class="header__cart-item">
                     <img src="${thisProducts[i].img}" alt="" class="header__cart-img">
                     <div class="header__cart-item-info">
@@ -720,15 +731,16 @@ function renderCartNoti() {
                                 <span class="header__cart-item-qnt">${thisCartItems[i].number}</span>
                             </div>
                         </div>
-                        <div class="header__cart-item-body">
-                            <span class="header__cart-item-description">Phân loại hàng: Bạc</span>
-                        </div>
+                        
                     </div>
                 </li>
-            </ul>`
+            `
         }
+        htmlNoti += `</ul>`
         htmlNoti += `<button onclick="renderCart()" class="btn btn--primary header__cart-has-cart-button">Xem giỏ hàng</button>`
-        document.querySelector('.header__cart-list').innerHTML = htmlNoti;
+        htmlNoti += `</div>
+        </div>`
+        document.querySelector('.header__cart').innerHTML = htmlNoti;
     }
 }
 
