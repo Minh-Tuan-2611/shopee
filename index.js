@@ -235,12 +235,12 @@ function loginAccount() {
             }
         }
     }
-    if (checkEmail == false) {
+    if (checkEmail == false && email.trim().length > 0) {
         document.getElementById('email-login').classList.add('input-error');
         document.getElementById('email-login').parentElement.querySelector('.error-msg').innerHTML = 'Email không tồn tại, vui lòng nhập lại !';
     }
     if (checkEmail == true) {
-        if (checkPassword == false) {
+        if (checkPassword == false && password.trim().length > 0) {
             document.getElementById('password-login').classList.add('input-error');
             document.getElementById('password-login').parentElement.querySelector('.error-msg').innerHTML = 'Sai mật khẩu, vui lòng nhập lại !';
         }
@@ -636,7 +636,7 @@ function renderCart() {
                 <input type="number" class="cart-item-number" value="${thisCartItems[i].number}">
                 <p class="cart-item-sum-money">${thisProducts[i].priceNew()*thisCartItems[i].number} ₫</p>
                 <div class="cart-item-delete">
-                    <i onclick="removeCart('${thisProducts[i].id}')" class="fas fa-trash cart-item-delete-icon"></i>
+                    <i onclick="removeCart('${thisProducts[i].id}'),renderCartNoti()" class="fas fa-trash cart-item-delete-icon"></i>
                 </div>
             </div>`
         }
