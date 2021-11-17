@@ -454,7 +454,6 @@ function renderAppContainer() {
         var product_item = new product(product_list[i].id, product_list[i].img, product_list[i].name, product_list[i].priceOld, product_list[i].percentSale, product_list[i].rating);
         listProduct.push(product_item);
     }
-    console.log(listProduct);
 
     var y = listProduct.map(function(product, index) {
         return `<div class="grid__column-2-5">
@@ -546,5 +545,13 @@ function renderProductDetail(id) {
             </button>
         </div>
     </div>
+</div>`
+}
+
+function renderCart() {
+    document.querySelector('.app__container').innerHTML = `<div class="cart-empty">
+    <img src="./asset/img/no_cart.png" alt="" class="cart-empty-img">
+    <div class="cart-empty-text">Giỏ hàng của bạn còn trống</div>
+    <button onclick="renderAppContainer();" class="cart-empty-btn">MUA NGAY</button>
 </div>`
 }
