@@ -709,7 +709,7 @@ function renderCartNoti() {
         document.querySelector('.header__cart').innerHTML = `
         <div class="header__cart-wrap">
                         <i class="header__cart-icon fas fa-shopping-cart"></i>
-                        <div class="header__cart-list">
+                        <div class="header__cart-list" onclick = "renderCart()" style="cursor: pointer">
         <img src="./asset/img/no_cart.png" alt="" class="header__cart--no-cart-img">
         <p class="header__cart-list--no-cart-msg">
             Chưa có sản phẩm
