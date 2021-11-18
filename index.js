@@ -589,6 +589,18 @@ function addCart(id) {
     saveCartListItemToStorage(cartListItem);
 }
 
+function addCartNumber(id) {
+    var cartListItem = getCartListItem();
+    for (var i = 0; i < cartListItem.length; i++) {
+        var currentItem = cartListItem[i];
+        if (currentItem.id == id) {
+            cartListItem[i].number++;
+        }
+    }
+    saveCartListItemToStorage(cartListItem);
+    renderCart()
+}
+
 function renderCart() {
     var cartListItem = getCartListItem();
     if (cartListItem.length == 0) {
@@ -633,7 +645,13 @@ function renderCart() {
                     <p class="cart-item-price-old">${thisProducts[i].priceOld} ₫</p>
                     <p class="cart-item-price-sale">${thisProducts[i].priceNew()} ₫</p>
                 </div>
-                <p class="cart-item-number">Số lượng: ${thisCartItems[i].number}</p>
+                <span class="cart-item-number">
+                    <button onclick="removeCart('${thisProducts[i].id}'),renderCartNoti()" class="cart-item-number-btn"> - </button>
+                    <p class="cart-item-number-text">
+                        ${thisCartItems[i].number}
+                    </p>
+                    <button onclick="addCartNumber('${thisProducts[i].id}'),renderCartNoti()" class="cart-item-number-btn"> + </button>
+                </span>
                 <p class="cart-item-sum-money">${thisProducts[i].priceNew()*thisCartItems[i].number} ₫</p>
                 <div class="cart-item-delete">
                     <i onclick="removeCart('${thisProducts[i].id}'),renderCartNoti()" class="fas fa-trash cart-item-delete-icon"></i>
