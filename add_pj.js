@@ -31,7 +31,7 @@ function creareProduct() {
     var priceOld = document.querySelector('.product-price-old').value;
     var percentSale = document.querySelector('.product-percent-sale').value;
     var rating = document.querySelector('.product-rating').value;
-    if (img != '' && name != '' && priceOld != '' && percentSale != '' && rating != '') {
+    if (img != '' && name != '' && priceOld != '' && percentSale != '' && rating != '' && priceOld > 0 && percentSale > 0 && rating > 0 && percentSale < 100) {
         var productItem = new product(null, img, name, priceOld, percentSale, rating);
         product_list.push(productItem);
         localStorage.setItem('productList', JSON.stringify(product_list));
