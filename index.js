@@ -654,7 +654,7 @@ function renderCart() {
                 </span>
                 <p class="cart-item-sum-money">${thisProducts[i].priceNew()*thisCartItems[i].number} ₫</p>
                 <div class="cart-item-delete">
-                    <i onclick="removeCart('${thisProducts[i].id}'),renderCartNoti()" class="fas fa-trash cart-item-delete-icon"></i>
+                    <i onclick="removeCartItem('${thisProducts[i].id}'),renderCartNoti()" class="fas fa-trash cart-item-delete-icon"></i>
                 </div>
             </div>`
         }
@@ -673,6 +673,18 @@ function removeCart(id) {
             renderCart()
         }
         if (cartListItem[i].number == 0) {
+            cartListItem.splice(i, 1);
+            saveCartListItemToStorage(cartListItem);
+            renderCart()
+        }
+    }
+}
+
+function removeCartItem(id) {
+    var cartListItem = getCartListItem();
+    for (var i = 0; i < cartListItem.length; i++) {
+        var currentItem = cartListItem[i];
+        if (currentItem.id == id) {
             cartListItem.splice(i, 1);
             saveCartListItemToStorage(cartListItem);
             renderCart()
