@@ -2,7 +2,6 @@ var product_list = JSON.parse(localStorage.getItem('productList'));
 if (product_list == null) {
     product_list = [];
 }
-console.log(product_list);
 
 function taoId() {
     var id = Math.random().toString().substr(2, 10) + '_' + String(new Date().getTime());
@@ -50,7 +49,6 @@ for (var i = 0; i < product_list.length; i++) {
     var product_item = new product(product_list[i].id, product_list[i].img, product_list[i].name, product_list[i].priceOld, product_list[i].percentSale, product_list[i].rating);
     listProduct.push(product_item);
 }
-console.log(listProduct);
 
 function renderProduct() {
     var y = listProduct.map(function(product, index) {
