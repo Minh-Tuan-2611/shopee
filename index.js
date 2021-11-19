@@ -20,12 +20,17 @@ button_2.onclick = function() {
 
 function open1() {
     document.querySelector('.modal').classList.add('active');
+    tab_1.classList.add('active');
+    tab_2.classList.remove('active');
+    document.querySelector('.new-product').classList.remove('active');
 }
 
 function open2() {
     document.querySelector('.modal').classList.add('active');
     tab_1.classList.remove('active');
     tab_2.classList.add('active');
+    document.querySelector('.new-product').classList.remove('active');
+
 }
 
 function open3() {
