@@ -30,6 +30,38 @@ function creareProduct() {
     var priceOld = document.querySelector('.product-price-old').value;
     var percentSale = document.querySelector('.product-percent-sale').value;
     var rating = document.querySelector('.product-rating').value;
+    if (img == '') {
+        document.querySelector('.product-img').classList.add('input-error');
+        document.querySelector('.product-img').parentElement.querySelector('.msg-error').innerHTML = 'Vui lòng nhập đúng giá trị của trường này';
+    }
+    if (name == '') {
+        document.querySelector('.product-name').classList.add('input-error');
+        document.querySelector('.product-name').parentElement.querySelector('.msg-error').innerHTML = 'Vui lòng nhập đúng giá trị của trường này';
+    }
+    if (priceOld == '') {
+        document.querySelector('.product-price-old').classList.add('input-error');
+        document.querySelector('.product-price-old').parentElement.querySelector('.msg-error').innerHTML = 'Vui lòng nhập đúng giá trị của trường này';
+    }
+    if (priceOld != '' && priceOld <= 0) {
+        document.querySelector('.product-price-old').classList.add('input-error');
+        document.querySelector('.product-price-old').parentElement.querySelector('.msg-error').innerHTML = 'Vui lòng nhập giá trị lớn hơn 0';
+    }
+    if (percentSale == '') {
+        document.querySelector('.product-percent-sale').classList.add('input-error');
+        document.querySelector('.product-percent-sale').parentElement.querySelector('.msg-error').innerHTML = 'Vui lòng nhập đúng giá trị của trường này';
+    }
+    if (percentSale != '' && (percentSale <= 0 || percentSale > 100)) {
+        document.querySelector('.product-percent-sale').classList.add('input-error');
+        document.querySelector('.product-percent-sale').parentElement.querySelector('.msg-error').innerHTML = 'Vui lòng nhập giá trị lớn hơn 0 và nhỏ hơn 100';
+    }
+    if (rating == '') {
+        document.querySelector('.product-rating').classList.add('input-error');
+        document.querySelector('.product-rating').parentElement.querySelector('.msg-error').innerHTML = 'Vui lòng nhập đúng giá trị của trường này';
+    }
+    if (rating != '' && rating <= 0) {
+        document.querySelector('.product-rating').classList.add('input-error');
+        document.querySelector('.product-rating').parentElement.querySelector('.msg-error').innerHTML = 'Vui lòng nhập giá trị lớn hơn 0';
+    }
     if (img != '' && name != '' && priceOld != '' && percentSale != '' && rating != '' && priceOld > 0 && percentSale > 0 && rating > 0 && percentSale < 100) {
         var productItem = new product(null, img, name, priceOld, percentSale, rating);
         product_list.push(productItem);
@@ -134,3 +166,24 @@ function renderProduct() {
 }
 
 renderProduct();
+
+// form validation 
+var input = document.querySelectorAll('.input');
+for (var i = 0; i < input.length; i++) {
+    confirm(input[i]);
+}
+
+function confirm(input) {
+    input.onblur = function() {
+        if (input.value.trim() == '') {
+            input.classList.add('input-error');
+            input.parentElement.querySelector('.msg-error').innerHTML = 'Vui lòng nhập đúng giá trị của trường này';
+        }
+    }
+    input.onmouseout = function() {
+        if (input.value.trim() !== '') {
+            input.classList.remove('input-error');
+            input.parentElement.querySelector('.msg-error').innerHTML = '';
+        }
+    }
+}

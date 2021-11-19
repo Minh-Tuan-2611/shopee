@@ -334,11 +334,9 @@
 .new-product {
     margin: auto;
     position: relative;
-    top: 50px;
     padding: 30px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    margin-bottom: 100px;
     display: none;
     background-color: #fff;
     width: 600px;
@@ -366,10 +364,6 @@ label,
 
 .input-error {
     border: 1px solid rgba(247, 32, 25, 0.774);
-}
-
-.form-group+.form-group {
-    margin-top: 20px;
 }
 
 .create-btn {
