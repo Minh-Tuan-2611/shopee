@@ -28,6 +28,13 @@ function open2() {
     tab_2.classList.add('active');
 }
 
+function open3() {
+    document.querySelector('.modal').classList.add('active');
+    document.querySelector('.new-product').classList.add('active');
+    tab_1.classList.remove('active');
+    tab_2.classList.remove('active');
+}
+
 var modal = document.querySelector('.modal');
 modal.onclick = function() {
     modal.classList.remove('active');

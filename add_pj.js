@@ -40,7 +40,9 @@ function creareProduct() {
         document.querySelector('.product-price-old').value = '';
         document.querySelector('.product-percent-sale').value = '';
         document.querySelector('.product-rating').value = '';
+        document.querySelector('.modal').classList.remove('active');
         alert('Tạo sản phẩm thành công');
+        renderAppContainer();
     }
 }
 var listProduct = [];

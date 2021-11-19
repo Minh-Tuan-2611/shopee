@@ -92,7 +92,7 @@
                             </div>
                         </li>
                         <li class="header__navbar-item">
-                            <a target="_blank" href="./add_pj.html" class="header__navbar-item-link">
+                            <a onclick="open3()" href="#" class="header__navbar-item-link">
                                 <i class="fas fa-plus-circle header__navbar-icon"></i> Tạo sản phẩm
                             </a>
                         </li>
@@ -351,6 +351,41 @@
                     </a>
 
                 </div>
+            </div>
+
+            <!-- add product form -->
+            <div class="new-product">
+                <div class="form-group">
+                    <label for="">Hình ảnh sản phẩm</label>
+                    <input class="input product-img" type="text" placeholder="Nhập link hình ảnh sản phẩm">
+                    <p class="msg-error"></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Tên sản phẩm</label>
+                    <input class="input product-name" type="text" placeholder="Nhập tên sản phẩm">
+                    <p class="msg-error"></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Giá gốc</label>
+                    <input class="input product-price-old" type="number" placeholder="Nhập giá gốc sản phẩm">
+                    <p class="msg-error"></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Phần trăm giảm giá</label>
+                    <input class="input product-percent-sale" type="number" placeholder="Nhập phần trăm giảm giá ( Giá trị từ 0 - 100 )">
+                    <p class="msg-error"></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Ratinh</label>
+                    <input class="input product-rating" type="number" placeholder="Nhập rating cho sản phẩm">
+                    <p class="msg-error"></p>
+                </div>
+
+                <button onclick="creareProduct()" class="create-btn">Tạo sản phẩm</button>
             </div>
         </div>
     </div>
