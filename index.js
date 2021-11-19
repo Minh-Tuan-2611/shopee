@@ -342,7 +342,8 @@ function product(id, img, name, priceOld, percentSale, rating) {
 }
 
 function renderAppContainer() {
-    document.querySelector('.app__container').innerHTML = `<div class="grid">
+    document.querySelector('.app__container').innerHTML = `
+<div class="grid">
     <div class="grid__row app__content">
         <div class="grid__column-2">
             <nav class="category">
@@ -456,42 +457,43 @@ function renderAppContainer() {
     }
 
     var y = listProduct.map(function(product, index) {
-        return `<div class="grid__column-2-5">
-    <a onclick="renderProductDetail('${product.id}')" class="home-product-item" href="#">
-        <img src="${product.img}" alt="" class="home-product-item__img">
-        <h4 class="home-product-item__name">${product.name}</h4>
-        <div class="home-product-item__price">
-            <span class="home-product-item__price-old">${product.priceOld} ₫</span>
-            <span class="home-product-item__price-current">${product.priceNew()} ₫</span>
-        </div>
-        <div class="home-product-item__action">
-            <span class="home-product-item__like home-product-item__like--liked">
-                <i class="home-product-item__like-icon-empty far fa-heart"></i>
-                <i class="home-product-item__like-icon-fill fas fa-heart"></i>
-            </span>
-            <div class="home-product-item__rating">
-                <i class="home-product-item__star-gold fas fa-star"></i>
-                <i class="home-product-item__star-gold fas fa-star"></i>
-                <i class="home-product-item__star-gold fas fa-star"></i>
-                <i class="home-product-item__star-gold fas fa-star"></i>
-                <i class="fas fa-star"></i>
-            </div>
-            <div class="home-product-item__sold">${product.rating} đã bán</div>
-        </div>
-        <div class="home-product-item__origin">
-            <span class="home-product-item__brand">Whoo</span>
-            <span class="home-product-item__origin-title">Hàn Quốc</span>
-        </div>
-        <div class="home-product-item__favourite">
-            <i class="fas fa-check"></i>
-            <span>Yêu thích</span>
-        </div>
-        <div class="home-product-item__sale-off">
-            <span class="home-product-item__sale-off-percent">${product.percentSale}%</span>
-            <span class="home-product-item__sale-off-lable">GIẢM</span>
-        </div>
-    </a>
-</div>`
+        return `
+        <div class="grid__column-2-5">
+            <a onclick="renderProductDetail('${product.id}')" class="home-product-item" href="#">
+                <img src="${product.img}" alt="" class="home-product-item__img">
+                <h4 class="home-product-item__name">${product.name}</h4>
+                <div class="home-product-item__price">
+                    <span class="home-product-item__price-old">${product.priceOld} ₫</span>
+                    <span class="home-product-item__price-current">${product.priceNew()} ₫</span>
+                </div>
+                <div class="home-product-item__action">
+                    <span class="home-product-item__like home-product-item__like--liked">
+                        <i class="home-product-item__like-icon-empty far fa-heart"></i>
+                        <i class="home-product-item__like-icon-fill fas fa-heart"></i>
+                    </span>
+                    <div class="home-product-item__rating">
+                        <i class="home-product-item__star-gold fas fa-star"></i>
+                        <i class="home-product-item__star-gold fas fa-star"></i>
+                        <i class="home-product-item__star-gold fas fa-star"></i>
+                        <i class="home-product-item__star-gold fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="home-product-item__sold">${product.rating} đã bán</div>
+                </div>
+                <div class="home-product-item__origin">
+                    <span class="home-product-item__brand">Whoo</span>
+                    <span class="home-product-item__origin-title">Hàn Quốc</span>
+                </div>
+                <div class="home-product-item__favourite">
+                    <i class="fas fa-check"></i>
+                    <span>Yêu thích</span>
+                </div>
+                <div class="home-product-item__sale-off">
+                    <span class="home-product-item__sale-off-percent">${product.percentSale}%</span>
+                    <span class="home-product-item__sale-off-lable">GIẢM</span>
+                </div>
+            </a>
+        </div>`
     })
     var z = y.join(' ');
 
@@ -520,32 +522,33 @@ function renderProductDetail(id) {
         }
     }
 
-    document.querySelector('.app__container').innerHTML = `<div class="grid">
-    <div class="grid__row product-detail">
-        <img src="${thisProduct.img}" alt="" class="product-detail-img">
-        <div class="product-detail-infor">
-            <h1 class="product-detail-name">${thisProduct.name}</h1>
-            <div class="product-detail-price">
-                <div class="product-detail-price-price">
-                    <p class="product-detail-priceOld">${thisProduct.priceOld} ₫</p>
-                    <p class="product-detail-priceSale">${thisProduct.priceNew()} ₫</p>
-                    <p class="product-detail-percentSale">${thisProduct.percentSale}% GIẢM</p>
-                </div>
-                <div class="product-detail-price-slogan">
-                    <img src="./asset/img/soganicon.png" alt="" class="product-detail-price-slogan-img">
-                    <div class="product-detail-price-slogan-text-text">
-                        <p class="product-detail-price-slogan-text">Gì cũng rẻ</p>
-                        <p class="product-detail-price-slogan-ad">Giá tốt nhất so với các sản phẩm cùng loại trên Shopee!</p>
+    document.querySelector('.app__container').innerHTML = `
+        <div class="grid">
+            <div class="grid__row product-detail">
+                <img src="${thisProduct.img}" alt="" class="product-detail-img">
+                <div class="product-detail-infor">
+                    <h1 class="product-detail-name">${thisProduct.name}</h1>
+                    <div class="product-detail-price">
+                        <div class="product-detail-price-price">
+                            <p class="product-detail-priceOld">${thisProduct.priceOld} ₫</p>
+                            <p class="product-detail-priceSale">${thisProduct.priceNew()} ₫</p>
+                            <p class="product-detail-percentSale">${thisProduct.percentSale}% GIẢM</p>
+                        </div>
+                        <div class="product-detail-price-slogan">
+                            <img src="./asset/img/soganicon.png" alt="" class="product-detail-price-slogan-img">
+                            <div class="product-detail-price-slogan-text-text">
+                                <p class="product-detail-price-slogan-text">Gì cũng rẻ</p>
+                                <p class="product-detail-price-slogan-ad">Giá tốt nhất so với các sản phẩm cùng loại trên Shopee!</p>
+                            </div>
+                        </div>
                     </div>
+                    <button onclick="addCart('${thisProduct.id}'),renderCartNoti()" class="product-detail-btn">
+                        <i class="fas fa-cart-plus product-detail-btn-icon"></i>
+                        Thêm Vào Giỏ Hàng
+                    </button>
                 </div>
             </div>
-            <button onclick="addCart('${thisProduct.id}'),renderCartNoti()" class="product-detail-btn">
-                <i class="fas fa-cart-plus product-detail-btn-icon"></i>
-                Thêm Vào Giỏ Hàng
-            </button>
-        </div>
-    </div>
-</div>`
+        </div>`
 }
 
 function cartItem(id, number) {
@@ -604,7 +607,8 @@ function addCartNumber(id) {
 function renderCart() {
     var cartListItem = getCartListItem();
     if (cartListItem.length == 0) {
-        document.querySelector('.app__container').innerHTML = `<div class="cart-empty">
+        document.querySelector('.app__container').innerHTML = `
+    <div class="cart-empty">
         <img src="./asset/img/no_cart.png" alt="" class="cart-empty-img">
         <div class="cart-empty-text">Giỏ hàng của bạn còn trống</div>
         <button onclick="renderAppContainer();" class="cart-empty-btn">MUA NGAY</button>
@@ -696,7 +700,8 @@ function removeAllCart() {
     var cartListItem = getCartListItem();
     cartListItem.splice(0, cartListItem.length);
     saveCartListItemToStorage(cartListItem);
-    document.querySelector('.app__container').innerHTML = `<div class="cart-empty">
+    document.querySelector('.app__container').innerHTML = `
+    <div class="cart-empty">
         <img src="./asset/img/no_cart.png" alt="" class="cart-empty-img">
         <div class="cart-empty-text">Giỏ hàng của bạn còn trống</div>
         <button onclick="renderAppContainer();" class="cart-empty-btn">MUA NGAY</button>
@@ -708,13 +713,14 @@ function renderCartNoti() {
     if (cartListItem.length == 0) {
         document.querySelector('.header__cart').innerHTML = `
         <div class="header__cart-wrap">
-                        <i class="header__cart-icon fas fa-shopping-cart"></i>
-                        <div class="header__cart-list" onclick = "renderCart()" style="cursor: pointer">
-        <img src="./asset/img/no_cart.png" alt="" class="header__cart--no-cart-img">
-        <p class="header__cart-list--no-cart-msg">
-            Chưa có sản phẩm
-        </p>
-        </div></div>`
+            <i class="header__cart-icon fas fa-shopping-cart"></i>
+            <div class="header__cart-list" onclick = "renderCart()" style="cursor: pointer">
+                <img src="./asset/img/no_cart.png" alt="" class="header__cart--no-cart-img">
+                <p class="header__cart-list--no-cart-msg">
+                    Chưa có sản phẩm
+                </p>
+            </div>
+        </div>`
         document.querySelector('.header__cart-notice').classList.add('none');
     } else if (cartListItem.length > 0) {
         var product_list = JSON.parse(localStorage.getItem('productList'));
