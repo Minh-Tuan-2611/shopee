@@ -200,6 +200,7 @@ function createAccount() {
         document.querySelector('#password-register').value = '';
         document.querySelector('#password-confirm').value = '';
         document.querySelector('#username-register').value = '';
+        modal.classList.remove('active');
         alert('Bạn đã đăng ký tài khoản thành công !');
     }
 }
