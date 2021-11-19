@@ -54,42 +54,81 @@ console.log(listProduct);
 
 function renderProduct() {
     var y = listProduct.map(function(product, index) {
-        return `<div class="grid__column-2-5">
-        <a onclick="renderProductDetail('${product.id}')" class="home-product-item" href="#">
-            <img src="${product.img}" alt="" class="home-product-item__img">
-            <h4 class="home-product-item__name">${product.name}</h4>
-            <div class="home-product-item__price">
-                <span class="home-product-item__price-old">${product.priceOld} ₫</span>
-                <span class="home-product-item__price-current">${product.priceNew()} ₫</span>
-            </div>
-            <div class="home-product-item__action">
-                <span class="home-product-item__like home-product-item__like--liked">
-                    <i class="home-product-item__like-icon-empty far fa-heart"></i>
-                    <i class="home-product-item__like-icon-fill fas fa-heart"></i>
-                </span>
-                <div class="home-product-item__rating">
-                    <i class="home-product-item__star-gold fas fa-star"></i>
-                    <i class="home-product-item__star-gold fas fa-star"></i>
-                    <i class="home-product-item__star-gold fas fa-star"></i>
-                    <i class="home-product-item__star-gold fas fa-star"></i>
-                    <i class="fas fa-star"></i>
+        if (product.rating < 1000) {
+            return `<div class="grid__column-2-5">
+            <a onclick="renderProductDetail('${product.id}')" class="home-product-item" href="#">
+                <img src="${product.img}" alt="" class="home-product-item__img">
+                <h4 class="home-product-item__name">${product.name}</h4>
+                <div class="home-product-item__price">
+                    <span class="home-product-item__price-old">${product.priceOld} ₫</span>
+                    <span class="home-product-item__price-current">${product.priceNew()} ₫</span>
                 </div>
-                <div class="home-product-item__sold">${product.rating} đã bán</div>
-            </div>
-            <div class="home-product-item__origin">
-                <span class="home-product-item__brand">Whoo</span>
-                <span class="home-product-item__origin-title">Hàn Quốc</span>
-            </div>
-            <div class="home-product-item__favourite">
-                <i class="fas fa-check"></i>
-                <span>Yêu thích</span>
-            </div>
-            <div class="home-product-item__sale-off">
-                <span class="home-product-item__sale-off-percent">${product.percentSale}%</span>
-                <span class="home-product-item__sale-off-lable">GIẢM</span>
-            </div>
-        </a>
-    </div>`
+                <div class="home-product-item__action">
+                    <span class="home-product-item__like home-product-item__like--liked">
+                        <i class="home-product-item__like-icon-empty far fa-heart"></i>
+                        <i class="home-product-item__like-icon-fill fas fa-heart"></i>
+                    </span>
+                    <div class="home-product-item__rating">
+                        <i class="home-product-item__star-gold fas fa-star"></i>
+                        <i class="home-product-item__star-gold fas fa-star"></i>
+                        <i class="home-product-item__star-gold fas fa-star"></i>
+                        <i class="home-product-item__star-gold fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="home-product-item__sold">${product.rating} đã bán</div>
+                </div>
+                <div class="home-product-item__origin">
+                    <span class="home-product-item__brand">Whoo</span>
+                    <span class="home-product-item__origin-title">Hàn Quốc</span>
+                </div>
+                <div class="home-product-item__favourite">
+                    <i class="fas fa-check"></i>
+                    <span>Yêu thích</span>
+                </div>
+                <div class="home-product-item__sale-off">
+                    <span class="home-product-item__sale-off-percent">${product.percentSale}%</span>
+                    <span class="home-product-item__sale-off-lable">GIẢM</span>
+                </div>
+            </a>
+        </div>`
+        } else if (product.rating == 1000) {
+            return `<div class="grid__column-2-5">
+            <a onclick="renderProductDetail('${product.id}')" class="home-product-item" href="#">
+                <img src="${product.img}" alt="" class="home-product-item__img">
+                <h4 class="home-product-item__name">${product.name}</h4>
+                <div class="home-product-item__price">
+                    <span class="home-product-item__price-old">${product.priceOld} ₫</span>
+                    <span class="home-product-item__price-current">${product.priceNew()} ₫</span>
+                </div>
+                <div class="home-product-item__action">
+                    <span class="home-product-item__like home-product-item__like--liked">
+                        <i class="home-product-item__like-icon-empty far fa-heart"></i>
+                        <i class="home-product-item__like-icon-fill fas fa-heart"></i>
+                    </span>
+                    <div class="home-product-item__rating">
+                        <i class="home-product-item__star-gold fas fa-star"></i>
+                        <i class="home-product-item__star-gold fas fa-star"></i>
+                        <i class="home-product-item__star-gold fas fa-star"></i>
+                        <i class="home-product-item__star-gold fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="home-product-item__sold">${product.rating}+ đã bán</div>
+                </div>
+                <div class="home-product-item__origin">
+                    <span class="home-product-item__brand">Whoo</span>
+                    <span class="home-product-item__origin-title">Hàn Quốc</span>
+                </div>
+                <div class="home-product-item__favourite">
+                    <i class="fas fa-check"></i>
+                    <span>Yêu thích</span>
+                </div>
+                <div class="home-product-item__sale-off">
+                    <span class="home-product-item__sale-off-percent">${product.percentSale}%</span>
+                    <span class="home-product-item__sale-off-lable">GIẢM</span>
+                </div>
+            </a>
+        </div>`
+        }
     })
     var z = y.join(' ');
 
