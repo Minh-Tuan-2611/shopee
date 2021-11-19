@@ -174,8 +174,6 @@ function createAccount() {
             check = false;
             document.querySelector('#email-register').classList.add('input-error');
             document.querySelector('#email-register').parentElement.querySelector('.error-msg').innerHTML = 'Email đã tồn tại, vui lòng nhập lại email khác';
-        } else if (email !== currentAccount.email) {
-            check = true;
         }
     }
 
@@ -186,8 +184,6 @@ function createAccount() {
             checkUsername = false;
             document.querySelector('#username-register').classList.add('input-error');
             document.querySelector('#username-register').parentElement.querySelector('.error-msg').innerHTML = 'username đã tồn tại, vui lòng nhập lại username khác';
-        } else if (username !== currentAccount.username) {
-            checkUsername = true;
         }
     }
 
