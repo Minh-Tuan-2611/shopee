@@ -205,8 +205,8 @@ function createAccount() {
 // Đăng nhập
 
 function renderLoginRegister() {
-    document.querySelector('.user').innerHTML = `<li class="header__navbar-item header__navbar-item-strong header__navbar-item--separate">Đăng ký</li>
-    <li class="header__navbar-item header__navbar-item-strong">Đăng nhập</li>`
+    document.querySelector('.user').innerHTML = `<li onclick="open1()" class="header__navbar-item header__navbar-item-strong header__navbar-item--separate">Đăng ký</li>
+    <li onclick="open2()" class="header__navbar-item header__navbar-item-strong">Đăng nhập</li>`
     var arrayAccount = JSON.parse(localStorage.getItem('accountActives'));
     for (var i = 0; i < arrayAccount.length; i++) {
         arrayAccount.splice(i, 1);
@@ -282,7 +282,7 @@ function loginAccount() {
                                                             <li class="header__navbar-user-item">
                                                                 <a href="">Đơn mua</a>
                                                             </li>
-                                                            <li onclick="renderLoginRegister()" class="header__navbar-user-item">
+                                                            <li onclick="renderLoginRegister(),removeAllCart(),renderCartNoti()" class="header__navbar-user-item">
                                                                 <a href="">Đăng xuất</a>
                                                             </li>
                                                         </ul>
@@ -325,7 +325,7 @@ function checkAccountStatus() {
                                                             <li class="header__navbar-user-item">
                                                                 <a href="">Đơn mua</a>
                                                             </li>
-                                                            <li onclick="renderLoginRegister()" class="header__navbar-user-item">
+                                                            <li onclick="renderLoginRegister(),removeAllCart(),renderCartNoti()" class="header__navbar-user-item">
                                                                 <a>Đăng xuất</a>
                                                             </li>
                                                         </ul>
@@ -585,21 +585,30 @@ function saveCartListItemToStorage(cartListItem) {
 }
 
 function addCart(id) {
-    alert('Thêm thành công sản phẩm này');
-    var cartListItem = getCartListItem();
-    var checkCart = false;
-    for (var i = 0; i < cartListItem.length; i++) {
-        var currentItem = cartListItem[i];
-        if (currentItem.id == id) {
-            cartListItem[i].number++;
-            checkCart = true;
+    var account = JSON.parse(localStorage.getItem('accountActives'));
+    if (account == null) {
+        account = [];
+    }
+    if (account.length == 0) {
+        alert('Vui lòng đăng nhập để mua hàng');
+    }
+    if (account.length == 1) {
+        alert('Thêm thành công sản phẩm này');
+        var cartListItem = getCartListItem();
+        var checkCart = false;
+        for (var i = 0; i < cartListItem.length; i++) {
+            var currentItem = cartListItem[i];
+            if (currentItem.id == id) {
+                cartListItem[i].number++;
+                checkCart = true;
+            }
         }
+        if (checkCart == false) {
+            var itemCart = new cartItem(id, 1);
+            cartListItem.push(itemCart);
+        }
+        saveCartListItemToStorage(cartListItem);
     }
-    if (checkCart == false) {
-        var itemCart = new cartItem(id, 1);
-        cartListItem.push(itemCart);
-    }
-    saveCartListItemToStorage(cartListItem);
 }
 
 function addCartNumber(id) {
