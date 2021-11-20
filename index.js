@@ -602,10 +602,10 @@ function addCart(id) {
         account = [];
     }
     if (account.length == 0) {
-        alert('Vui lòng đăng nhập để mua hàng');
+        alert('Vui lòng đăng nhập để mua hàng !');
     }
     if (account.length == 1) {
-        alert('Thêm thành công sản phẩm này');
+        alert('Thêm thành công sản phẩm này !');
         var cartListItem = getCartListItem();
         var checkCart = false;
         for (var i = 0; i < cartListItem.length; i++) {
