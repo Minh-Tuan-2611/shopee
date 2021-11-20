@@ -34,10 +34,19 @@ function open2() {
 }
 
 function open3() {
-    document.querySelector('.modal').classList.add('active');
-    document.querySelector('.new-product').classList.add('active');
-    tab_1.classList.remove('active');
-    tab_2.classList.remove('active');
+    var account = JSON.parse(localStorage.getItem('accountActives'));
+    if (account == null) {
+        account = [];
+    }
+    if (account.length == 0) {
+        alert('Vui lòng đăng nhập để tạo sản phẩm !');
+    }
+    if (account.length == 1) {
+        document.querySelector('.modal').classList.add('active');
+        document.querySelector('.new-product').classList.add('active');
+        tab_1.classList.remove('active');
+        tab_2.classList.remove('active');
+    }
 }
 
 var modal = document.querySelector('.modal');
@@ -208,6 +217,9 @@ function renderLoginRegister() {
     document.querySelector('.user').innerHTML = `<li onclick="open1()" class="header__navbar-item header__navbar-item-strong header__navbar-item--separate">Đăng ký</li>
     <li onclick="open2()" class="header__navbar-item header__navbar-item-strong">Đăng nhập</li>`
     var arrayAccount = JSON.parse(localStorage.getItem('accountActives'));
+    document.querySelector('.create-new-product').onclick = function() {
+        alert('Vui lòng đăng nhập để tạo sản phẩm !');
+    }
     for (var i = 0; i < arrayAccount.length; i++) {
         arrayAccount.splice(i, 1);
     }

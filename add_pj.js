@@ -62,7 +62,8 @@ function creareProduct() {
         document.querySelector('.product-rating').classList.add('input-error');
         document.querySelector('.product-rating').parentElement.querySelector('.msg-error').innerHTML = 'Vui lòng nhập giá trị lớn hơn 0';
     }
-    if (img != '' && name != '' && priceOld != '' && percentSale != '' && rating != '' && priceOld > 0 && percentSale > 0 && rating > 0 && percentSale < 100) {
+
+    if (img != '' && name != '' && priceOld != '' && percentSale != '' && rating != '' && priceOld > 0 && percentSale > 0 && rating > 0 && percentSale < 100 && account.length == 1) {
         var productItem = new product(null, img, name, priceOld, percentSale, rating);
         product_list.push(productItem);
         localStorage.setItem('productList', JSON.stringify(product_list));
@@ -72,7 +73,7 @@ function creareProduct() {
         document.querySelector('.product-percent-sale').value = '';
         document.querySelector('.product-rating').value = '';
         document.querySelector('.modal').classList.remove('active');
-        alert('Tạo sản phẩm thành công');
+        alert('Tạo sản phẩm thành công !');
         renderAppContainer();
     }
 }
