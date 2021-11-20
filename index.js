@@ -180,13 +180,11 @@ function createAccount() {
     var checkUsername = true;
     for (var i = 0; i < accoutList.length; i++) {
         var currentAccount = accoutList[i];
-        if (username == currentAccount.username) {
+        if (username == currentAccount.username)
             checkUsername = false;
-            document.querySelector('#username-register').classList.add('input-error');
-            document.querySelector('#username-register').parentElement.querySelector('.error-msg').innerHTML = 'username đã tồn tại, vui lòng nhập lại username khác';
-        }
+        document.querySelector('#username-register').classList.add('input-error');
+        document.querySelector('#username-register').parentElement.querySelector('.error-msg').innerHTML = 'username đã tồn tại, vui lòng nhập lại username khác';
     }
-
     if (checkEmail == true && checkUsername == true && username.trim() != '' && password.trim() != '' && password_confirm.trim().length >= 8 && password_confirm.trim() === password.trim() && check == true) {
         var newAccount = new accountUser(null, email, password, username);
         accoutList.push(newAccount);
@@ -200,6 +198,8 @@ function createAccount() {
         alert('Bạn đã đăng ký tài khoản thành công !');
     }
 }
+
+
 
 // Đăng nhập
 
