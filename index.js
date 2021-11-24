@@ -340,8 +340,8 @@ function checkAccountStatus() {
                                                             <li class="header__navbar-user-item">
                                                                 <a href="">Đơn mua</a>
                                                             </li>
-                                                            <li onclick="renderLoginRegister(),removeAllCart(),renderCartNoti()" class="header__navbar-user-item">
-                                                                <a>Đăng xuất</a>
+                                                            <li class="header__navbar-user-item">
+                                                                <a onclick="renderLoginRegister(),removeAllCart(),renderCartNoti()" href="./index.html">Đăng xuất</a>
                                                             </li>
                                                         </ul>
                                                     </li>`;
