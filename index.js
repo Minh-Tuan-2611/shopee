@@ -403,10 +403,10 @@ function renderAppContainer() {
                     <i class="select-input__icon fas fa-angle-down"></i>
                     <ul class="select-input__list">
                         <li class="select-input__item">
-                            <a href="" class="select-input__link">Giá: Thấp đến cao</a>
+                            <a onclick="sortUpProduct(),renderAppContainer()" class="select-input__link">Giá: Thấp đến cao</a>
                         </li>
                         <li class="select-input__item">
-                            <a href="" class="select-input__link">Giá: Cao đến thấp</a>
+                            <a onclick="sortDownProduct(),renderAppContainer()" class="select-input__link">Giá: Cao đến thấp</a>
                         </li>
                     </ul>
                 </div>
@@ -526,6 +526,54 @@ function renderAppContainer() {
 }
 
 renderAppContainer();
+
+function sortUpProduct() {
+    var product_list = JSON.parse(localStorage.getItem('productList'));
+    if (product_list == null) {
+        product_list = [];
+    }
+
+    var listProduct = [];
+    for (var i = 0; i < product_list.length; i++) {
+        var product_item = new product(product_list[i].id, product_list[i].img, product_list[i].name, product_list[i].priceOld, product_list[i].percentSale, product_list[i].rating);
+        listProduct.push(product_item);
+    }
+
+    for (var i = 0; i < listProduct.length - 1; i++) {
+        for (var j = i; j < listProduct.length; j++) {
+            if (listProduct[i].priceNew() > listProduct[j].priceNew()) {
+                var temp = listProduct[i];
+                listProduct[i] = listProduct[j];
+                listProduct[j] = temp;
+            }
+        }
+    }
+    localStorage.setItem('productList', JSON.stringify(listProduct));
+}
+
+function sortDownProduct() {
+    var product_list = JSON.parse(localStorage.getItem('productList'));
+    if (product_list == null) {
+        product_list = [];
+    }
+
+    var listProduct = [];
+    for (var i = 0; i < product_list.length; i++) {
+        var product_item = new product(product_list[i].id, product_list[i].img, product_list[i].name, product_list[i].priceOld, product_list[i].percentSale, product_list[i].rating);
+        listProduct.push(product_item);
+    }
+
+    for (var i = 0; i < listProduct.length - 1; i++) {
+        for (var j = i; j < listProduct.length; j++) {
+            if (listProduct[i].priceNew() < listProduct[j].priceNew()) {
+                var temp = listProduct[i];
+                listProduct[i] = listProduct[j];
+                listProduct[j] = temp;
+            }
+        }
+    }
+    localStorage.setItem('productList', JSON.stringify(listProduct));
+}
 
 function renderProductDetail(id) {
 
