@@ -92,6 +92,11 @@ var accoutList = JSON.parse(localStorage.getItem('accoutList'));
 if (accoutList == null) {
     accoutList = [];
 }
+
+var inforAccount = [];
+inforAccount.length = accoutList.length;
+console.log(inforAccount.length);
+
 var accountActives = JSON.parse(localStorage.getItem('accountActives'));
 if (accountActives == null) {
     accountActives = [];
@@ -220,9 +225,7 @@ function renderLoginRegister() {
     document.querySelector('.create-new-product').onclick = function() {
         alert('Vui lòng đăng nhập để tạo sản phẩm !');
     }
-    for (var i = 0; i < arrayAccount.length; i++) {
-        arrayAccount.splice(i, 1);
-    }
+    arrayAccount = [];
     localStorage.setItem('accountActives', JSON.stringify(arrayAccount));
 }
 
@@ -294,8 +297,8 @@ function loginAccount() {
                                                             <li class="header__navbar-user-item">
                                                                 <a href="">Đơn mua</a>
                                                             </li>
-                                                            <li onclick="renderLoginRegister(),removeAllCart(),renderCartNoti()" class="header__navbar-user-item">
-                                                                <a href="">Đăng xuất</a>
+                                                            <li class="header__navbar-user-item">
+                                                                <a onclick="renderLoginRegister(),removeAllCart(),renderCartNoti()" href="./index.html">Đăng xuất</a>
                                                             </li>
                                                         </ul>
                                                     </li>`;
@@ -752,7 +755,7 @@ function renderCartNoti() {
                 </p>
             </div>
         </div>`
-        document.querySelector('.header__cart-notice').classList.add('none');
+
     } else if (cartListItem.length > 0) {
         var product_list = JSON.parse(localStorage.getItem('productList'));
         if (product_list == null) {
