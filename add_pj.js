@@ -122,7 +122,7 @@ function renderProduct() {
                 </div>
             </a>
         </div>`
-        } else if (product.rating == 1000) {
+        } else if (product.rating >= 1000) {
             return `<div class="grid__column-2-5">
             <a onclick="renderProductDetail('${product.id}')" class="home-product-item" href="#">
                 <img src="${product.img}" alt="" class="home-product-item__img">
