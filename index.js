@@ -470,20 +470,15 @@ function renderAppContainer() {
         </div>
     </div>
 </div>`
-    var product_list = JSON.parse(localStorage.getItem('productList'));
-    if (product_list == null) {
-        product_list = [];
-    }
+    renderProduct();
+}
 
-    var listProduct = [];
-    for (var i = 0; i < product_list.length; i++) {
-        var product_item = new product(product_list[i].id, product_list[i].img, product_list[i].name, product_list[i].priceOld, product_list[i].percentSale, product_list[i].rating);
-        listProduct.push(product_item);
-    }
+renderAppContainer();
 
+function renderProductSort(listProduct) {
     var y = listProduct.map(function(product, index) {
-        return `
-        <div class="grid__column-2-5">
+        if (product.rating < 1000) {
+            return `<div class="grid__column-2-5">
             <a onclick="renderProductDetail('${product.id}')" class="home-product-item" href="#">
                 <img src="${product.img}" alt="" class="home-product-item__img">
                 <h4 class="home-product-item__name">${product.name}</h4>
@@ -503,7 +498,7 @@ function renderAppContainer() {
                         <i class="home-product-item__star-gold fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <div class="home-product-item__sold">${product.rating} đã bán</div>
+                    <div class="home-product-item__sold">${parseInt(product.rating)} đã bán</div>
                 </div>
                 <div class="home-product-item__origin">
                     <span class="home-product-item__brand">Whoo</span>
@@ -519,13 +514,49 @@ function renderAppContainer() {
                 </div>
             </a>
         </div>`
+        } else if (product.rating == 1000) {
+            return `<div class="grid__column-2-5">
+            <a onclick="renderProductDetail('${product.id}')" class="home-product-item" href="#">
+                <img src="${product.img}" alt="" class="home-product-item__img">
+                <h4 class="home-product-item__name">${product.name}</h4>
+                <div class="home-product-item__price">
+                    <span class="home-product-item__price-old">${product.priceOld} ₫</span>
+                    <span class="home-product-item__price-current">${product.priceNew()} ₫</span>
+                </div>
+                <div class="home-product-item__action">
+                    <span class="home-product-item__like home-product-item__like--liked">
+                        <i class="home-product-item__like-icon-empty far fa-heart"></i>
+                        <i class="home-product-item__like-icon-fill fas fa-heart"></i>
+                    </span>
+                    <div class="home-product-item__rating">
+                        <i class="home-product-item__star-gold fas fa-star"></i>
+                        <i class="home-product-item__star-gold fas fa-star"></i>
+                        <i class="home-product-item__star-gold fas fa-star"></i>
+                        <i class="home-product-item__star-gold fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="home-product-item__sold">${product.rating}+ đã bán</div>
+                </div>
+                <div class="home-product-item__origin">
+                    <span class="home-product-item__brand">Whoo</span>
+                    <span class="home-product-item__origin-title">Hàn Quốc</span>
+                </div>
+                <div class="home-product-item__favourite">
+                    <i class="fas fa-check"></i>
+                    <span>Yêu thích</span>
+                </div>
+                <div class="home-product-item__sale-off">
+                    <span class="home-product-item__sale-off-percent">${product.percentSale}%</span>
+                    <span class="home-product-item__sale-off-lable">GIẢM</span>
+                </div>
+            </a>
+        </div>`
+        }
     })
     var z = y.join(' ');
 
     document.querySelector('.list-product').innerHTML = z;
 }
-
-renderAppContainer();
 
 function sortUpProduct() {
     var product_list = JSON.parse(localStorage.getItem('productList'));
@@ -550,49 +581,7 @@ function sortUpProduct() {
             }
         }
     }
-    var y = listProductUp.map(function(product, index) {
-        return `
-        <div class="grid__column-2-5">
-            <a onclick="renderProductDetail('${product.id}')" class="home-product-item" href="#">
-                <img src="${product.img}" alt="" class="home-product-item__img">
-                <h4 class="home-product-item__name">${product.name}</h4>
-                <div class="home-product-item__price">
-                    <span class="home-product-item__price-old">${product.priceOld} ₫</span>
-                    <span class="home-product-item__price-current">${product.priceNew()} ₫</span>
-                </div>
-                <div class="home-product-item__action">
-                    <span class="home-product-item__like home-product-item__like--liked">
-                        <i class="home-product-item__like-icon-empty far fa-heart"></i>
-                        <i class="home-product-item__like-icon-fill fas fa-heart"></i>
-                    </span>
-                    <div class="home-product-item__rating">
-                        <i class="home-product-item__star-gold fas fa-star"></i>
-                        <i class="home-product-item__star-gold fas fa-star"></i>
-                        <i class="home-product-item__star-gold fas fa-star"></i>
-                        <i class="home-product-item__star-gold fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <div class="home-product-item__sold">${product.rating} đã bán</div>
-                </div>
-                <div class="home-product-item__origin">
-                    <span class="home-product-item__brand">Whoo</span>
-                    <span class="home-product-item__origin-title">Hàn Quốc</span>
-                </div>
-                <div class="home-product-item__favourite">
-                    <i class="fas fa-check"></i>
-                    <span>Yêu thích</span>
-                </div>
-                <div class="home-product-item__sale-off">
-                    <span class="home-product-item__sale-off-percent">${product.percentSale}%</span>
-                    <span class="home-product-item__sale-off-lable">GIẢM</span>
-                </div>
-            </a>
-        </div>`
-    })
-    var z = y.join(' ');
-
-    document.querySelector('.list-product').innerHTML = '';
-    document.querySelector('.list-product').innerHTML = z;
+    renderProductSort(listProductUp);
 }
 
 function sortDownProduct() {
@@ -617,50 +606,7 @@ function sortDownProduct() {
             }
         }
     }
-
-    var y = listProductUp.map(function(product, index) {
-        return `
-        <div class="grid__column-2-5">
-            <a onclick="renderProductDetail('${product.id}')" class="home-product-item" href="#">
-                <img src="${product.img}" alt="" class="home-product-item__img">
-                <h4 class="home-product-item__name">${product.name}</h4>
-                <div class="home-product-item__price">
-                    <span class="home-product-item__price-old">${product.priceOld} ₫</span>
-                    <span class="home-product-item__price-current">${product.priceNew()} ₫</span>
-                </div>
-                <div class="home-product-item__action">
-                    <span class="home-product-item__like home-product-item__like--liked">
-                        <i class="home-product-item__like-icon-empty far fa-heart"></i>
-                        <i class="home-product-item__like-icon-fill fas fa-heart"></i>
-                    </span>
-                    <div class="home-product-item__rating">
-                        <i class="home-product-item__star-gold fas fa-star"></i>
-                        <i class="home-product-item__star-gold fas fa-star"></i>
-                        <i class="home-product-item__star-gold fas fa-star"></i>
-                        <i class="home-product-item__star-gold fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <div class="home-product-item__sold">${product.rating} đã bán</div>
-                </div>
-                <div class="home-product-item__origin">
-                    <span class="home-product-item__brand">Whoo</span>
-                    <span class="home-product-item__origin-title">Hàn Quốc</span>
-                </div>
-                <div class="home-product-item__favourite">
-                    <i class="fas fa-check"></i>
-                    <span>Yêu thích</span>
-                </div>
-                <div class="home-product-item__sale-off">
-                    <span class="home-product-item__sale-off-percent">${product.percentSale}%</span>
-                    <span class="home-product-item__sale-off-lable">GIẢM</span>
-                </div>
-            </a>
-        </div>`
-    })
-    var z = y.join(' ');
-
-    document.querySelector('.list-product').innerHTML = '';
-    document.querySelector('.list-product').innerHTML = z;
+    renderProductSort(listProductUp);
 }
 
 function renderProductDetail(id) {
