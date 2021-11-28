@@ -331,7 +331,6 @@ function loginAccount() {
         renderCart();
         renderCartNoti();
         renderAppContainer();
-        // localStorage.removeItem('cartListItem');
     }
 }
 
@@ -366,7 +365,6 @@ function checkAccountStatus() {
     <li onclick = "open2()" class="header__navbar-item header__navbar-item-strong">Đăng nhập</li>`
     }
     if (account.length == 1) {
-        // var listAccount = JSON.parse(localStorage.getItem('accoutList'));
         for (var i = 0; i < accoutList.length; i++) {
             var currentAccount = accoutList[i];
             if (account[0].email == currentAccount.email) {
