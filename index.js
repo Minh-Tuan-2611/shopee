@@ -93,9 +93,17 @@ if (accoutList == null) {
     accoutList = [];
 }
 
-var inforAccount = [];
-inforAccount.length = accoutList.length;
-console.log(inforAccount.length);
+var inforAccount = JSON.parse(localStorage.getItem('inforAccount'));
+if (inforAccount == null) {
+    var inforAccount = [];
+    inforAccount.length = accoutList.length;
+}
+
+for (var i = 0; i < inforAccount.length; i++) {
+    if (inforAccount[i] == null) {
+        inforAccount[i] = [];
+    }
+}
 
 var accountActives = JSON.parse(localStorage.getItem('accountActives'));
 if (accountActives == null) {
@@ -218,16 +226,24 @@ function createAccount() {
 
 // Đăng nhập
 
-function renderLoginRegister() {
-    document.querySelector('.user').innerHTML = `<li onclick="open1()" class="header__navbar-item header__navbar-item-strong header__navbar-item--separate">Đăng ký</li>
-    <li onclick="open2()" class="header__navbar-item header__navbar-item-strong">Đăng nhập</li>`
-    var arrayAccount = JSON.parse(localStorage.getItem('accountActives'));
-    document.querySelector('.create-new-product').onclick = function() {
-        alert('Vui lòng đăng nhập để tạo sản phẩm !');
+function checkIndex() {
+    var account = JSON.parse(localStorage.getItem('accountActives'));
+    if (account == null) {
+        account = [];
     }
-    arrayAccount = [];
-    localStorage.setItem('accountActives', JSON.stringify(arrayAccount));
+    if (account.length == 0) {
+        return undefined;
+    } else if (account.length == 1) {
+        for (var i = 0; i < accoutList.length; i++) {
+            var currentAccount = accoutList[i];
+            if (account[0].email == currentAccount.email) {
+                var thisAccount = currentAccount;
+            }
+        }
+    }
+    return accoutList.indexOf(thisAccount);
 }
+
 
 function loginAccount() {
     var email = document.getElementById('email-login').value;
@@ -302,8 +318,33 @@ function loginAccount() {
                                                             </li>
                                                         </ul>
                                                     </li>`;
+
+
         alert('Bạn đã đăng nhập thành công !');
+        var index = checkIndex();
+        var cartListItem = getCartListItemAccount(index);
+        saveCartListItemToStorage(cartListItem);
+        renderCart();
+        renderCartNoti();
+        renderAppContainer();
     }
+}
+
+function renderLoginRegister() {
+    var cartListItem = getCartListItem();
+    var cartListItem2 = cartListItem;
+    var index = checkIndex();
+    inforAccount[index] = cartListItem2;
+    localStorage.setItem('inforAccount', JSON.stringify(inforAccount));
+
+    document.querySelector('.user').innerHTML = `<li onclick="open1()" class="header__navbar-item header__navbar-item-strong header__navbar-item--separate">Đăng ký</li>
+    <li onclick="open2()" class="header__navbar-item header__navbar-item-strong">Đăng nhập</li>`
+    var arrayAccount = JSON.parse(localStorage.getItem('accountActives'));
+    document.querySelector('.create-new-product').onclick = function() {
+        alert('Vui lòng đăng nhập để tạo sản phẩm !');
+    }
+    arrayAccount = [];
+    localStorage.setItem('accountActives', JSON.stringify(arrayAccount));
 }
 
 // hiển thị accountUser
@@ -665,6 +706,17 @@ function cartItem(id, number) {
 
 var keyLocalStorage = 'cartListItem';
 
+function getCartListItemAccount(index) {
+    var cartListItems = JSON.parse(localStorage.getItem('inforAccount'));
+    var cartListItem;
+    if (index == undefined) {
+        cartListItem = [];
+    } else if (index != undefined) {
+        cartListItem = cartListItems[index];
+    }
+    return cartListItem;
+}
+
 function getCartListItem() {
     var cartListItem = new Array();
     var jsonCartListItem = localStorage.getItem(keyLocalStorage);
@@ -826,6 +878,7 @@ function removeAllCart() {
 
 function renderCartNoti() {
     var cartListItem = getCartListItem();
+
     if (cartListItem.length == 0) {
         document.querySelector('.header__cart').innerHTML = `
         <div class="header__cart-wrap">
