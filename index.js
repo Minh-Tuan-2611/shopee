@@ -23,6 +23,7 @@ function open1() {
     tab_1.classList.add('active');
     tab_2.classList.remove('active');
     document.querySelector('.new-product').classList.remove('active');
+    document.querySelector('title').innerHTML = 'Đăng ký tài khoản';
 }
 
 function open2() {
@@ -30,7 +31,7 @@ function open2() {
     tab_1.classList.remove('active');
     tab_2.classList.add('active');
     document.querySelector('.new-product').classList.remove('active');
-
+    document.querySelector('title').innerHTML = 'Đăng nhập';
 }
 
 function open3() {
@@ -47,12 +48,15 @@ function open3() {
         document.querySelector('.new-product').classList.add('active');
         tab_1.classList.remove('active');
         tab_2.classList.remove('active');
+        document.querySelector('title').innerHTML = 'Thêm sản phẩm cho trang chủ';
     }
+
 }
 
 var modal = document.querySelector('.modal');
 modal.onclick = function() {
     modal.classList.remove('active');
+    document.querySelector('title').innerHTML = 'Shopee - Trang chủ';
 }
 
 document.querySelector('.modal__body').addEventListener('click', function(event) {
