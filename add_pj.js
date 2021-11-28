@@ -74,7 +74,7 @@ function creareProduct() {
         document.querySelector('.product-rating').value = '';
         document.querySelector('.modal').classList.remove('active');
         alert('Tạo sản phẩm thành công !');
-        renderAppContainer();
+        renderProduct()
     }
 }
 var listProduct = [];
@@ -84,6 +84,15 @@ for (var i = 0; i < product_list.length; i++) {
 }
 
 function renderProduct() {
+    var product_list = JSON.parse(localStorage.getItem('productList'));
+    if (product_list == null) {
+        product_list = [];
+    }
+    var listProduct = [];
+    for (var i = 0; i < product_list.length; i++) {
+        var product_item = new product(product_list[i].id, product_list[i].img, product_list[i].name, product_list[i].priceOld, product_list[i].percentSale, product_list[i].rating);
+        listProduct.push(product_item);
+    }
     var y = listProduct.map(function(product, index) {
         if (product.rating < 1000) {
             return `<div class="grid__column-2-5">
@@ -143,7 +152,7 @@ function renderProduct() {
                         <i class="home-product-item__star-gold fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <div class="home-product-item__sold">${product.rating}+ đã bán</div>
+                    <div class="home-product-item__sold">1000 + đã bán</div>
                 </div>
                 <div class="home-product-item__origin">
                     <span class="home-product-item__brand">Whoo</span>

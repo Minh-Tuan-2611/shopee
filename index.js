@@ -582,7 +582,7 @@ function renderProductSort(listProduct) {
                         <i class="home-product-item__star-gold fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <div class="home-product-item__sold">${product.rating}+ đã bán</div>
+                    <div class="home-product-item__sold">1000 + đã bán</div>
                 </div>
                 <div class="home-product-item__origin">
                     <span class="home-product-item__brand">Whoo</span>
