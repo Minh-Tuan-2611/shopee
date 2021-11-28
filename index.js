@@ -9,14 +9,18 @@ var tab_2 = document.querySelectorAll('.auth-form')[1];
 button_1.onclick = function() {
     tab_1.classList.remove('active');
     tab_2.classList.add('active');
+    document.querySelector('title').innerHTML = 'Đăng nhập';
 }
 
 button_2.onclick = function() {
     tab_2.classList.remove('active');
     tab_1.classList.add('active');
+    document.querySelector('title').innerHTML = 'Đăng ký tài khoản';
 }
 
 // Ấn để hiên ra đăng kí và đăng nhập
+
+var value = '';
 
 function open1() {
     document.querySelector('.modal').classList.add('active');
@@ -56,7 +60,7 @@ function open3() {
 var modal = document.querySelector('.modal');
 modal.onclick = function() {
     modal.classList.remove('active');
-    document.querySelector('title').innerHTML = 'Shopee - Trang chủ';
+    document.querySelector('title').innerHTML = value;
 }
 
 document.querySelector('.modal__body').addEventListener('click', function(event) {
@@ -68,6 +72,7 @@ var button_cancles = document.querySelectorAll('.btn.cancle');
 button_cancles.forEach(function(button_cancle, index) {
     button_cancle.onclick = function() {
         document.querySelector('.modal').classList.remove('active');
+        document.querySelector('title').innerHTML = value;
     }
 })
 
@@ -224,6 +229,7 @@ function createAccount() {
         document.querySelector('#username-register').value = '';
         modal.classList.remove('active');
         alert('Bạn đã đăng ký tài khoản thành công !');
+        document.querySelector('title').innerHTML = value;
     }
 }
 
@@ -520,7 +526,8 @@ function renderAppContainer() {
     </div>
 </div>`
     renderProduct();
-    document.querySelector('title').innerHTML = 'Shopee - Trang chủ';
+    value = 'Shopee - Trang chủ'
+    document.querySelector('title').innerHTML = value;
 
 }
 
@@ -707,7 +714,8 @@ function renderProductDetail(id) {
                 </div>
             </div>
         </div>`
-    document.querySelector('title').innerHTML = `${thisProduct.name}`;
+    value = `${thisProduct.name}`
+    document.querySelector('title').innerHTML = value;
 
 }
 
@@ -846,7 +854,8 @@ function renderCart() {
         htmlCart += `<button onclick="removeAllCart(),renderCartNoti()" class="delete-all">Xóa toàn bộ sản phẩm</button>`
         document.querySelector('.app__container').innerHTML = htmlCart;
     }
-    document.querySelector('title').innerHTML = 'Chi tiết giỏ hàng';
+    value = 'Chi tiết giỏ hàng'
+    document.querySelector('title').innerHTML = value;
 
 }
 
