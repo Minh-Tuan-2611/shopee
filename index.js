@@ -516,6 +516,8 @@ function renderAppContainer() {
     </div>
 </div>`
     renderProduct();
+    document.querySelector('title').innerHTML = 'Shopee - Trang chủ';
+
 }
 
 renderAppContainer();
@@ -701,6 +703,8 @@ function renderProductDetail(id) {
                 </div>
             </div>
         </div>`
+    document.querySelector('title').innerHTML = `${thisProduct.name}`;
+
 }
 
 function cartItem(id, number) {
@@ -838,6 +842,8 @@ function renderCart() {
         htmlCart += `<button onclick="removeAllCart(),renderCartNoti()" class="delete-all">Xóa toàn bộ sản phẩm</button>`
         document.querySelector('.app__container').innerHTML = htmlCart;
     }
+    document.querySelector('title').innerHTML = 'Chi tiết giỏ hàng';
+
 }
 
 function removeCart(id) {
@@ -955,3 +961,5 @@ function renderCartNoti() {
 }
 
 renderCartNoti();
+
+document.querySelector('title').innerHTML = 'Shopee - Trang chủ';
