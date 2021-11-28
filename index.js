@@ -40,6 +40,7 @@ function open3() {
     }
     if (account.length == 0) {
         alert('Vui lòng đăng nhập để tạo sản phẩm !');
+        open2()
     }
     if (account.length == 1) {
         document.querySelector('.modal').classList.add('active');
@@ -323,10 +324,14 @@ function loginAccount() {
         alert('Bạn đã đăng nhập thành công !');
         var index = checkIndex();
         var cartListItem = getCartListItemAccount(index);
+        if (cartListItem == undefined) {
+            cartListItem = [];
+        }
         saveCartListItemToStorage(cartListItem);
         renderCart();
         renderCartNoti();
         renderAppContainer();
+        // localStorage.removeItem('cartListItem');
     }
 }
 
@@ -342,6 +347,7 @@ function renderLoginRegister() {
     var arrayAccount = JSON.parse(localStorage.getItem('accountActives'));
     document.querySelector('.create-new-product').onclick = function() {
         alert('Vui lòng đăng nhập để tạo sản phẩm !');
+        open2();
     }
     arrayAccount = [];
     localStorage.setItem('accountActives', JSON.stringify(arrayAccount));
@@ -740,6 +746,7 @@ function addCart(id) {
     }
     if (account.length == 0) {
         alert('Vui lòng đăng nhập để mua hàng !');
+        open2()
     }
     if (account.length == 1) {
         alert('Thêm thành công sản phẩm này !');
