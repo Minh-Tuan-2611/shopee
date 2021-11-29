@@ -74,7 +74,8 @@ function creareProduct() {
         document.querySelector('.product-rating').value = '';
         document.querySelector('.modal').classList.remove('active');
         alert('Tạo sản phẩm thành công !');
-        renderProduct()
+        renderAppContainer();
+        document.querySelector('title').innerHTML = value;
     }
 }
 var listProduct = [];
