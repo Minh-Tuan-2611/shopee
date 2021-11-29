@@ -843,7 +843,7 @@ function renderCart() {
                     <p class="cart-item-number-text">
                         ${thisCartItems[i].number}
                     </p>
-                    <button onclick="addCartNumber('${thisProducts[i].id}'),renderCartNoti()" class="cart-item-number-btn"> + </button>
+                    <button style="padding-right: 9px;" onclick="addCartNumber('${thisProducts[i].id}'),renderCartNoti()" class="cart-item-number-btn"> + </button>
                 </span>
                 <p class="cart-item-sum-money">${thisProducts[i].priceNew()*thisCartItems[i].number} ₫</p>
                 <div class="cart-item-delete">
