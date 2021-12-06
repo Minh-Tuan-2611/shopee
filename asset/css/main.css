@@ -904,7 +904,7 @@ label,
 .app__container {
     background-color: #f5f5f5;
     padding: 30px 0;
-    min-height: 278px;
+    min-height: 400px;
 }
 
 .app__content {
