@@ -541,8 +541,8 @@ function renderProductSort(listProduct) {
                 <img src="${product.img}" alt="" class="home-product-item__img">
                 <h4 class="home-product-item__name">${product.name}</h4>
                 <div class="home-product-item__price">
-                    <span class="home-product-item__price-old">${product.priceOld} ₫</span>
-                    <span class="home-product-item__price-current">${product.priceNew()} ₫</span>
+                    <span class="home-product-item__price-old">${parseInt(product.priceOld).toLocaleString()} ₫</span>
+                    <span class="home-product-item__price-current">${product.priceNew().toLocaleString()} ₫</span>
                 </div>
                 <div class="home-product-item__action">
                     <span class="home-product-item__like home-product-item__like--liked">
@@ -578,8 +578,8 @@ function renderProductSort(listProduct) {
                 <img src="${product.img}" alt="" class="home-product-item__img">
                 <h4 class="home-product-item__name">${product.name}</h4>
                 <div class="home-product-item__price">
-                    <span class="home-product-item__price-old">${product.priceOld} ₫</span>
-                    <span class="home-product-item__price-current">${product.priceNew()} ₫</span>
+                    <span class="home-product-item__price-old">${parseInt(product.priceOld).toLocaleString()} ₫</span>
+                    <span class="home-product-item__price-current">${product.priceNew().toLocaleString()} ₫</span>
                 </div>
                 <div class="home-product-item__action">
                     <span class="home-product-item__like home-product-item__like--liked">
@@ -695,8 +695,8 @@ function renderProductDetail(id) {
                     <h1 class="product-detail-name">${thisProduct.name}</h1>
                     <div class="product-detail-price">
                         <div class="product-detail-price-price">
-                            <p class="product-detail-priceOld">${thisProduct.priceOld} ₫</p>
-                            <p class="product-detail-priceSale">${thisProduct.priceNew()} ₫</p>
+                            <p class="product-detail-priceOld">${parseInt(thisProduct.priceOld).toLocaleString()} ₫</p>
+                            <p class="product-detail-priceSale">${thisProduct.priceNew().toLocaleString()} ₫</p>
                             <p class="product-detail-percentSale">${thisProduct.percentSale}% GIẢM</p>
                         </div>
                         <div class="product-detail-price-slogan">
@@ -835,8 +835,8 @@ function renderCart() {
                 <img class="cart-item-img" src="${thisProducts[i].img}" alt="">
                 <p class="cart-item-name">${thisProducts[i].name}</p>
                 <div class="cart-item-price">
-                    <p class="cart-item-price-old">${thisProducts[i].priceOld} ₫</p>
-                    <p class="cart-item-price-sale">${thisProducts[i].priceNew()} ₫</p>
+                    <p class="cart-item-price-old">${parseInt(thisProducts[i].priceOld).toLocaleString()} ₫</p>
+                    <p class="cart-item-price-sale">${thisProducts[i].priceNew().toLocaleString()} ₫</p>
                 </div>
                 <span class="cart-item-number">
                     <button onclick="removeCart('${thisProducts[i].id}'),renderCartNoti()" class="cart-item-number-btn"> - </button>
@@ -845,7 +845,7 @@ function renderCart() {
                     </p>
                     <button style="padding-right: 9px;" onclick="addCartNumber('${thisProducts[i].id}'),renderCartNoti()" class="cart-item-number-btn"> + </button>
                 </span>
-                <p class="cart-item-sum-money">${thisProducts[i].priceNew()*thisCartItems[i].number} ₫</p>
+                <p class="cart-item-sum-money">${(thisProducts[i].priceNew()*thisCartItems[i].number).toLocaleString()} ₫</p>
                 <div class="cart-item-delete">
                     <i onclick="removeCartItem('${thisProducts[i].id}'),renderCartNoti()" class="fas fa-trash cart-item-delete-icon"></i>
                 </div>
@@ -955,7 +955,7 @@ function renderCartNoti() {
                         <div class="header__cart-item-head">
                             <h5 class="header__cart-item-name">${thisProducts[i].name}</h5>
                             <div class="header__cart-item-price-wrap">
-                                <span class="header__cart-item-price">${thisProducts[i].priceNew()} ₫</span>
+                                <span class="header__cart-item-price">${thisProducts[i].priceNew().toLocaleString()} ₫</span>
                                 <span class="header__cart-item-multiply">x</span>
                                 <span class="header__cart-item-qnt">${thisCartItems[i].number}</span>
                             </div>
