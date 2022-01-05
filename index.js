@@ -88,9 +88,17 @@ function confirm(input) {
             input.classList.add('input-error');
             input.parentElement.querySelector('.error-msg').innerHTML = 'Vui lòng nhập đúng giá trị của trường này';
         }
+        else if (input.value.trim() !== '') {
+            input.classList.remove('input-error');
+            input.parentElement.querySelector('.error-msg').innerHTML = '';
+        }
     }
-    input.onmouseout = function() {
-        if (input.value.trim() !== '') {
+    input.oninput = function () {
+        if (input.value.trim() == '') {
+            input.classList.add('input-error');
+            input.parentElement.querySelector('.error-msg').innerHTML = 'Vui lòng nhập đúng giá trị của trường này';
+        }
+        else if (input.value.trim() !== '') {
             input.classList.remove('input-error');
             input.parentElement.querySelector('.error-msg').innerHTML = '';
         }
