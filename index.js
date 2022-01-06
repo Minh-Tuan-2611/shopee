@@ -44,7 +44,7 @@ function open3() {
         account = [];
     }
     if (account.length == 0) {
-        alert('Vui lòng đăng nhập để tạo sản phẩm !');
+        swal("Xin lỗi !", "Vui lòng đăng nhập để tạo sản phẩm !", "warning");
         open2()
     }
     if (account.length == 1) {
@@ -236,7 +236,7 @@ function createAccount() {
         document.querySelector('#password-confirm').value = '';
         document.querySelector('#username-register').value = '';
         modal.classList.remove('active');
-        alert('Bạn đã đăng ký tài khoản thành công !');
+        swal("","Bạn đã đăng ký tài khoản thành công !", "success");
         document.querySelector('title').innerHTML = value;
     }
 }
@@ -339,7 +339,7 @@ function loginAccount() {
                                                     </li>`;
 
 
-        alert('Bạn đã đăng nhập thành công !');
+                                                    swal("","Bạn đã đăng nhập thành công !", "success");
         var index = checkIndex();
         var cartListItem = getCartListItemAccount(index);
         if (cartListItem == undefined) {
@@ -363,7 +363,7 @@ function renderLoginRegister() {
     <li onclick="open2()" class="header__navbar-item header__navbar-item-strong">Đăng nhập</li>`
     var arrayAccount = JSON.parse(localStorage.getItem('accountActives'));
     document.querySelector('.create-new-product').onclick = function() {
-        alert('Vui lòng đăng nhập để tạo sản phẩm !');
+        swal("Xin lỗi !", "Vui lòng đăng nhập để tạo sản phẩm !", "warning");
         open2();
     }
     arrayAccount = [];
@@ -767,11 +767,11 @@ function addCart(id) {
         account = [];
     }
     if (account.length == 0) {
-        alert('Vui lòng đăng nhập để mua hàng !');
+        swal("Xin lỗi !", "Vui lòng đăng nhập để mua hàng !", "warning");
         open2()
     }
     if (account.length == 1) {
-        alert('Thêm thành công sản phẩm này !');
+        swal("","Thêm thành công sản phẩm này !", "success");
         var cartListItem = getCartListItem();
         var checkCart = false;
         for (var i = 0; i < cartListItem.length; i++) {

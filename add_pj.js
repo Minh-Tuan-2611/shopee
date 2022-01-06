@@ -73,7 +73,7 @@ function creareProduct() {
         document.querySelector('.product-percent-sale').value = '';
         document.querySelector('.product-rating').value = '';
         document.querySelector('.modal').classList.remove('active');
-        alert('Tạo sản phẩm thành công !');
+        swal("", "Tạo sản phẩm thành công !", "success");
         renderAppContainer();
         document.querySelector('title').innerHTML = value;
     }
